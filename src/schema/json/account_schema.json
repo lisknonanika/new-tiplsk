@@ -1,0 +1,49 @@
+{
+    "type": "object",
+    "properties": {
+        "link": {
+            "type": "array",
+            "fieldNumber": 1,
+            "items": {
+                "type": "object",
+                "required": ["type", "id"],
+                "properties": {
+                    "type": {
+                        "dataType": "string",
+                        "fieldNumber": 1
+                    },
+                    "id": {
+                        "dataType": "string",
+                        "fieldNumber": 2
+                    }
+                }
+            }
+        },
+        "tx": {
+            "type": "array",
+            "fieldNumber": 2,
+            "items": {
+                "type": "object",
+                "required": ["type", "recipientId", "amount", "timestamp"],
+                "properties": {
+                    "type": {
+                        "dataType": "string",
+                        "fieldNumber": 1
+                    },
+                    "recipientId": {
+                        "dataType": "string",
+                        "fieldNumber": 2
+                    },
+                    "amount": {
+                        "dataType": "uint64",
+                        "fieldNumber": 3
+                    },
+                    "timestamp": {
+                        "dataType": "uint64",
+                        "fieldNumber": 4
+                    }
+                }
+            }
+        }
+    }
+}

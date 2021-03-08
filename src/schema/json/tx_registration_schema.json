@@ -1,0 +1,19 @@
+{
+    "$id": "tiplsk/register/asset",
+    "type": "object",
+    "required": ["type", "id", "address"],
+    "properties": {
+        "type": {
+            "dataType": "string",
+            "fieldNumber": 1
+        },
+        "id": {
+            "dataType": "string",
+            "fieldNumber": 2
+        },
+        "address": {
+            "dataType": "bytes",
+            "fieldNumber": 3
+        }
+    }
+}

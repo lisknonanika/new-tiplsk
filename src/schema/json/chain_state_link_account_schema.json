@@ -1,0 +1,28 @@
+{
+    "$id": "tiplsk/chainstate/linkaccount",
+    "type": "object",
+    "properties": {
+        "link": {
+            "type": "array",
+            "fieldNumber": 1,
+            "items": {
+                "type": "object",
+                "required": ["type", "id", "address"],
+                "properties": {
+                    "type": {
+                        "dataType": "string",
+                        "fieldNumber": 1
+                    },
+                    "id": {
+                        "dataType": "string",
+                        "fieldNumber": 2
+                    },
+                    "address": {
+                        "dataType": "string",
+                        "fieldNumber": 3
+                    }
+                }
+            }
+        }
+    }
+}

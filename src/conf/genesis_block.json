@@ -1,0 +1,53 @@
+{
+    "header": {
+        "generatorPublicKey": "",
+        "height": 0,
+        "id": "5d4d8f6fa76af6c89e3317aa7918956b3d02d1b8561ddde533c1597d4a208e78",
+        "previousBlockID": "",
+        "reward": "0",
+        "signature": "",
+        "timestamp": 1614524400,
+        "transactionRoot": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": 0,
+        "asset": {
+            "initRounds": 3,
+            "initDelegates": [
+                "9cabee3d27426676b852ce6b804cb2fdff7cd0b5"
+            ],
+            "accounts": [
+                {
+                    "address": "9cabee3d27426676b852ce6b804cb2fdff7cd0b5",
+                    "token": {
+                        "balance": "100000000000"
+                    },
+                    "sequence": {
+                        "nonce": "0"
+                    },
+                    "keys": {
+                        "mandatoryKeys": [],
+                        "optionalKeys": [],
+                        "numberOfSignatures": 0
+                    },
+                    "dpos": {
+                        "delegate": {
+                            "username": "tiplsk",
+                            "pomHeights": [],
+                            "consecutiveMissedBlocks": 0,
+                            "lastForgedHeight": 0,
+                            "isBanned": false,
+                            "totalVotesReceived": "1000000000000"
+                        },
+                        "sentVotes": [
+                            {
+                                "delegateAddress": "9cabee3d27426676b852ce6b804cb2fdff7cd0b5",
+                                "amount": "1000000000000"
+                            }
+                        ],
+                        "unlocking": []
+                    }
+                }
+            ]
+        }
+    },
+    "payload": []
+}
