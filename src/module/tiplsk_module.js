@@ -1,12 +1,12 @@
 const { BaseModule, codec } = require('lisk-sdk');
-const { RegistrationAsset } = require('./registration_asset');
+const { RegistrationAsset, AddTipAsset } = require('./asset');
 const { accountSchema, chainStateLinkAccountSchema, CHAIN_STATE_LINK_ACCOUNT } = require('../schema');
 
 class TipLskModule extends BaseModule { 
   name = 'tiplsk'; 
   id = 3000; 
   accountSchema = accountSchema;
-  transactionAssets = [ new RegistrationAsset() ];
+  transactionAssets = [ new RegistrationAsset(), new AddTipAsset() ];
   events = [];
 
   actions = { 

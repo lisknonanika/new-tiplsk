@@ -24,23 +24,27 @@
             "fieldNumber": 2,
             "items": {
                 "type": "object",
-                "required": ["type", "recipientId", "amount", "timestamp"],
+                "required": ["id", "type", "recipientId", "amount", "timestamp"],
                 "properties": {
-                    "type": {
+                    "id": {
                         "dataType": "string",
                         "fieldNumber": 1
                     },
-                    "recipientId": {
+                    "type": {
                         "dataType": "string",
                         "fieldNumber": 2
                     },
-                    "amount": {
-                        "dataType": "uint64",
+                    "recipientId": {
+                        "dataType": "string",
                         "fieldNumber": 3
                     },
-                    "timestamp": {
+                    "amount": {
                         "dataType": "uint64",
                         "fieldNumber": 4
+                    },
+                    "timestamp": {
+                        "dataType": "string",
+                        "fieldNumber": 5
                     }
                 }
             }

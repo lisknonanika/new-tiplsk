@@ -21,12 +21,32 @@ const createRegistrationTx = async (client, fee) => {
     }, conf.tiplsk.passphrase);
 }
 
+const createAddTipTx = async (client, fee) => {
+    return await client.transaction.create({
+        moduleID: 3000,
+        assetID: 10,
+        fee: fee,
+        asset: {
+            type: "twitter",
+            senderId: "12345678912312312",
+            recipientId: "99999123123123123",
+            amount: BigInt(100000000)
+        }
+    }, conf.tiplsk.passphrase);
+}
+
 (async () => {
     try {
         client = await apiClient.createWSClient(RPC_ENDPOINT);
-        const preTx = await createRegistrationTx(client, BigInt(0));
+        // const preTx = await createRegistrationTx(client, BigInt(0));
+        // const txFee = client.transaction.computeMinFee(preTx).toString();
+        // const tx = await createRegistrationTx(client, ceilFee(+txFee));
+        // const res = await client.transaction.send(tx);
+        // console.log(res);
+
+        const preTx = await createAddTipTx(client, BigInt(0));
         const txFee = client.transaction.computeMinFee(preTx).toString();
-        const tx = await createRegistrationTx(client, ceilFee(+txFee));
+        const tx = await createAddTipTx(client, ceilFee(+txFee));
         const res = await client.transaction.send(tx);
         console.log(res);
         

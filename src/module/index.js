@@ -1,8 +1,10 @@
-const { RegistrationAssetID, RegistrationAsset } = require('./registration_asset');
 const TipLskModule = require('./tiplsk_module');
+const {
+  RegistrationAssetID, RegistrationAsset,
+  AddTipAssetID, AddTipAsset } = require('./asset');
 
 module.exports = {
-  RegistrationAssetID,
-  RegistrationAsset,
-  TipLskModule
+  TipLskModule,
+  RegistrationAssetID, RegistrationAsset,
+  AddTipAssetID, AddTipAsset
 }

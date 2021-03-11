@@ -1,0 +1,23 @@
+{
+    "$id": "tiplsk/addtip/asset",
+    "type": "object",
+    "required": ["type", "senderId", "recipientId", "amount"],
+    "properties": {
+        "type": {
+            "dataType": "string",
+            "fieldNumber": 1
+        },
+        "senderId": {
+            "dataType": "string",
+            "fieldNumber": 2
+        },
+        "recipientId": {
+            "dataType": "string",
+            "fieldNumber": 3
+        },
+        "amount": {
+            "dataType": "uint64",
+            "fieldNumber": 4
+        }
+    }
+}
