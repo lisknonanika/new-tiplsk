@@ -1,6 +1,6 @@
 const { Application, HTTPAPIPlugin, utils } = require('lisk-sdk');
 const { genesisBlock, appConfig } = require('./conf');
-const { RegistrationModule } = require('./module');
+const { TipLskModule } = require('./module');
 
 genesisBlock.header.asset.accounts = genesisBlock.header.asset.accounts.map(
 	(a) =>
@@ -13,7 +13,7 @@ genesisBlock.header.asset.accounts = genesisBlock.header.asset.accounts.map(
 );
 
 const app = Application.defaultApplication(genesisBlock, appConfig);
-app.registerModule(RegistrationModule);
+app.registerModule(TipLskModule);
 app.registerPlugin(HTTPAPIPlugin);
 app
 	.run()

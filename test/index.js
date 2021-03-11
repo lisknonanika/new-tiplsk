@@ -15,7 +15,7 @@ const createRegistrationTx = async (client, fee) => {
         fee: fee,
         asset: {
             type: "twitter",
-            id: "12345678912312312",
+            senderId: "12345678912312312",
             address: hexToBuffer("fe4b6c7362ad277b871309090d0833c09fa9ebc2")
         }
     }, conf.tiplsk.passphrase);

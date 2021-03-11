@@ -2,7 +2,7 @@ const { BaseModule, codec } = require('lisk-sdk');
 const { RegistrationAsset } = require('./registration_asset');
 const { accountSchema, chainStateLinkAccountSchema, CHAIN_STATE_LINK_ACCOUNT } = require('../schema');
 
-class RegistrationModule extends BaseModule { 
+class TipLskModule extends BaseModule { 
   name = 'tiplsk'; 
   id = 3000; 
   accountSchema = accountSchema;
@@ -22,4 +22,4 @@ class RegistrationModule extends BaseModule {
   };
 }
 
-module.exports = RegistrationModule;
+module.exports = TipLskModule;

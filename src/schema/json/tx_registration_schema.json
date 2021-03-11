@@ -1,13 +1,13 @@
 {
     "$id": "tiplsk/register/asset",
     "type": "object",
-    "required": ["type", "id", "address"],
+    "required": ["type", "senderId", "address"],
     "properties": {
         "type": {
             "dataType": "string",
             "fieldNumber": 1
         },
-        "id": {
+        "senderId": {
             "dataType": "string",
             "fieldNumber": 2
         },
