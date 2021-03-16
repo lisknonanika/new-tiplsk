@@ -6,8 +6,7 @@ genesisBlock.header.asset.accounts = genesisBlock.header.asset.accounts.map(
 	(a) =>
 		utils.objects.mergeDeep({}, a, {
 			tiplsk: {
-				link: [],
-				tx: []
+				link: []
 			}
 		})
 );

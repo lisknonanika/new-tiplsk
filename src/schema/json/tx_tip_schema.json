@@ -1,23 +1,27 @@
 {
-    "$id": "tiplsk/addtip/asset",
+    "$id": "tiplsk/tip/asset",
     "type": "object",
     "required": ["type", "senderId", "recipientId", "amount"],
     "properties": {
-        "type": {
-            "dataType": "string",
+        "txId": {
+            "dataType": "bytes",
             "fieldNumber": 1
         },
-        "senderId": {
+        "type": {
             "dataType": "string",
             "fieldNumber": 2
         },
-        "recipientId": {
+        "senderId": {
             "dataType": "string",
             "fieldNumber": 3
         },
+        "recipientId": {
+            "dataType": "string",
+            "fieldNumber": 4
+        },
         "amount": {
             "dataType": "uint64",
-            "fieldNumber": 4
+            "fieldNumber": 5
         }
     }
 }

@@ -1,10 +1,13 @@
 const TipLskModule = require('./tiplsk_module');
 const {
   RegistrationAssetID, RegistrationAsset,
-  AddTipAssetID, AddTipAsset } = require('./asset');
+  PreRegistrationAssetID, PreRegistrationAsset,
+  PreTipAssetID, PreTipAsset
+} = require('./asset');
 
 module.exports = {
   TipLskModule,
   RegistrationAssetID, RegistrationAsset,
-  AddTipAssetID, AddTipAsset
+  PreRegistrationAssetID, PreRegistrationAsset,
+  PreTipAssetID, PreTipAsset
 }

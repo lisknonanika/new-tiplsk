@@ -3,17 +3,21 @@
     "type": "object",
     "required": ["type", "senderId", "address"],
     "properties": {
-        "type": {
-            "dataType": "string",
+        "txId": {
+            "dataType": "bytes",
             "fieldNumber": 1
         },
-        "senderId": {
+        "type": {
             "dataType": "string",
             "fieldNumber": 2
         },
+        "senderId": {
+            "dataType": "string",
+            "fieldNumber": 3
+        },
         "address": {
             "dataType": "bytes",
-            "fieldNumber": 3
+            "fieldNumber": 4
         }
     }
 }

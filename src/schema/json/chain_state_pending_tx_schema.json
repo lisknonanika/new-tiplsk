@@ -1,0 +1,55 @@
+{
+    "$id": "tiplsk/chainstate/pendingtx",
+    "type": "object",
+    "properties": {
+        "tx": {
+            "type": "array",
+            "fieldNumber": 1,
+            "items": {
+                "type": "object",
+                "required": ["type", "id", "height"],
+                "properties": {
+                    "type": {
+                        "dataType": "string",
+                        "fieldNumber": 1
+                    },
+                    "id": {
+                        "dataType": "string",
+                        "fieldNumber": 2
+                    },
+                    "height": {
+                        "dataType": "string",
+                        "fieldNumber": 3
+                    },
+                    "content": {
+                        "type": "object",
+                        "fieldNumber": 4,
+                        "required": ["type"],
+                        "properties": {
+                            "type": {
+                                "dataType": "string",
+                                "fieldNumber": 1
+                            },
+                            "senderId": {
+                                "dataType": "string",
+                                "fieldNumber": 2
+                            },
+                            "recipientId": {
+                                "dataType": "string",
+                                "fieldNumber": 3
+                            },
+                            "address": {
+                                "dataType": "string",
+                                "fieldNumber": 4
+                            },
+                            "amount": {
+                                "dataType": "string",
+                                "fieldNumber": 5
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

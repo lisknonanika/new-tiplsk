@@ -1,9 +1,9 @@
 const { RegistrationAssetID, RegistrationAsset } = require('./registration_asset');
-const { AddTipAsset, AddTipAssetID } = require('./add_tip_asset');
+const { PreRegistrationAssetID, PreRegistrationAsset } = require('./pre_registration_asset');
+const { PreTipAsset, PreTipAssetID } = require('./pre_tip_asset');
 
 module.exports = {
-  RegistrationAssetID,
-  RegistrationAsset,
-  AddTipAssetID,
-  AddTipAsset
+  PreRegistrationAssetID, PreRegistrationAsset,
+  RegistrationAssetID, RegistrationAsset,
+  PreTipAssetID, PreTipAsset
 }

@@ -18,36 +18,6 @@
                     }
                 }
             }
-        },
-        "tx": {
-            "type": "array",
-            "fieldNumber": 2,
-            "items": {
-                "type": "object",
-                "required": ["id", "type", "recipientId", "amount", "timestamp"],
-                "properties": {
-                    "id": {
-                        "dataType": "string",
-                        "fieldNumber": 1
-                    },
-                    "type": {
-                        "dataType": "string",
-                        "fieldNumber": 2
-                    },
-                    "recipientId": {
-                        "dataType": "string",
-                        "fieldNumber": 3
-                    },
-                    "amount": {
-                        "dataType": "uint64",
-                        "fieldNumber": 4
-                    },
-                    "timestamp": {
-                        "dataType": "string",
-                        "fieldNumber": 5
-                    }
-                }
-            }
         }
     }
 }
