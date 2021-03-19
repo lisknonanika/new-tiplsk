@@ -1,14 +1,15 @@
 {
-  "name": "sdk-v5",
+  "name": "tiplsk-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lisk-sdk": "^5.0.3"
-  }
+    "twitter-lite": "^1.1.0"
+  },
+  "devDependencies": {}
 }
