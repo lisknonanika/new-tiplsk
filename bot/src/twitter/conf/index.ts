@@ -5,6 +5,8 @@ export const API_RATE_LIMIT = "application/rate_limit_status";
 export const API_PATH_DM_GET = "direct_messages/events/list";
 export const API_PATH_DM_SEND = "direct_messages/events/new";
 
+export const BOT_TYPE = "twitter";
+
 export const APIKEY = {
   subdomain: "api",
   version: "1.1",

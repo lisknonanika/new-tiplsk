@@ -1,4 +1,4 @@
-import apiClient, { APIClient } from '@liskhq/lisk-api-client';
+import { APIClient, createWSClient } from '@liskhq/lisk-api-client';
 import { bufferToHex, getAddressFromBase32Address } from '@liskhq/lisk-cryptography';
 import { RPC_ENDPOINT, TIPLSK } from '../const';
 import { CommandResult, Registration } from '../type';
@@ -14,27 +14,24 @@ const createTx = async (client: APIClient, asset: Registration): Promise<Record<
 
 export const execute = async(type: string, command: string, senderId: string): Promise<CommandResult> => {
   try {
-    client = await apiClient.createWSClient(RPC_ENDPOINT);
+    client = await createWSClient(RPC_ENDPOINT);
     const words: string[] = command.split(/\s/g);
-    const address = words[words.length -1];
-  
+    // const address = getAddressFromBase32Address(words[words.length -1], "tip");  // TODO https://github.com/LiskHQ/lisk-sdk/issues/6185
+    const address = getAddressFromBase32Address(`lsk${words[words.length -1].slice(3)}`);
+
     const asset: Registration = {
       type: type.toLowerCase(),
       senderId: senderId,
-      address: getAddressFromBase32Address(address)
+      address: address
     }
     const tx = await createTx(client, asset);
     await client.transaction.send(tx);
-    return {
-      result: true,
-      data: Buffer.isBuffer(tx.id)? bufferToHex(tx.id): ""
-    }
+    return {result: true, data: Buffer.isBuffer(tx.id)? bufferToHex(tx.id): ""};
+
   } catch (err) {
     console.log(err);
-    return {
-      result: false,
-      message: err.message? err.message: "system error"
-    }
+    return {result: false, message: err.message? err.message: "system error"};
+    
   } finally {
     if (client) await client.disconnect();
   }

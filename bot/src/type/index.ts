@@ -17,3 +17,13 @@ export interface Tip extends Record<string, unknown> {
 	recipientNm: string;
 	amount: bigint;
 }
+
+export interface LinkAccountElem {
+	readonly type: string;
+	readonly id: string;
+	readonly address: string;
+}
+
+export interface LinkAccount {
+	readonly link: LinkAccountElem[];
+}

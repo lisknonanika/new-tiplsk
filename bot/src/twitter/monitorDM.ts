@@ -1,11 +1,11 @@
 import Twitter from 'twitter-lite';
 import {
-  APIKEY, COMMAND,
+  APIKEY, COMMAND, BOT_TYPE,
   DM_COUNT, DM_MONITOR_INTERVAL,
   API_RATE_LIMIT, API_PATH_DM_GET
 } from './conf';
 import { sleep } from '../util';
-import { registration } from '../command';
+import { registration, tip, balance, help } from '../command';
 import { TIPLSK_ID } from '../const';
 
 const client = new Twitter({
@@ -89,11 +89,12 @@ const executeCommand = async(data: any[]) => {
       // コマンド抽出
       const commands = text.match(COMMAND.dm.reg);
       if (!commands) continue;
-      const command = commands[0];
+      const command = commands[0].trim();
 
       // コマンド実行
-      const ret = await registration.execute("twitter", command, senderId);
+      const ret = await registration.execute(BOT_TYPE, command, senderId);
       if (!ret) continue;
+      console.log(ret);
 
       // DM送信
 
@@ -108,7 +109,7 @@ const executeCommand = async(data: any[]) => {
       // コマンド抽出
       const commands = text.match(COMMAND.dm.tip);
       if (!commands) continue;
-      const command = commands[0];
+      const command = commands[0].trim();
 
       // 本文中に存在するユーザーのIDを取得する
       const words: string[] = command.split(/\s/g);
@@ -124,6 +125,9 @@ const executeCommand = async(data: any[]) => {
         if (!words.find(v => screenNames.indexOf(v.toLowerCase()) >= 0)) continue;
 
         // コマンド実行
+      const ret = await tip.execute(BOT_TYPE, command, senderId, recipientId);
+      if (!ret) continue;
+      console.log(ret);
 
       // DM送信
 
@@ -139,9 +143,12 @@ const executeCommand = async(data: any[]) => {
       // コマンド抽出
       const commands = text.match(COMMAND.dm.balance);
       if (!commands) continue;
-      const command = commands[0];
+      const command = commands[0].trim();
       
       // コマンド実行
+      const ret = await balance.execute(command);
+      if (!ret) continue;
+      console.log(ret);
 
       // DM送信
 
@@ -153,14 +160,12 @@ const executeCommand = async(data: any[]) => {
     // ヘルプコマンドの場合
     // ----------------------------
     else if (COMMAND.dm.help.test(text)) {
-      // コマンド抽出
-      const commands = text.match(COMMAND.dm.help);
-      if (!commands) continue;
-      const command = commands[0];
-      
       // コマンド実行
 
       // DM送信
+      const ret = await help.execute(BOT_TYPE, senderId);
+      if (!ret) continue;
+      console.log(ret);
 
       // 送信者をコマンド実行済みとする
       senderIds.push(senderId);
@@ -177,9 +182,12 @@ const executeCommand = async(data: any[]) => {
       // DM取得のレート取得
       const limitData = await client.get(API_RATE_LIMIT, {resources: "direct_messages"});
       let remaining: number = limitData.resources.direct_messages["/direct_messages/events/list"].remaining;
+      console.log(`remaining: ${remaining}`);
 
       // DM取得
       const data = await getDM("", remaining, true);
+      console.log(data.length);
+      console.log(JSON.stringify(data));
 
       // コマンド実行
       await executeCommand(data);
