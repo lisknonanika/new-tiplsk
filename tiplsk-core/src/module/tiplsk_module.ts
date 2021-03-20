@@ -1,10 +1,11 @@
-import { BaseModule, codec, AfterGenesisBlockApplyContext } from 'lisk-sdk';
+import { BaseModule, codec, AfterGenesisBlockApplyContext, AfterBlockApplyContext } from 'lisk-sdk';
 import { PreRegistrationAsset, RegistrationAsset, PreTipAsset } from './asset';
 import {
   accountSchema, csLinkAccountSchema, csPendingTxSchema,
   CsLinkAccount, CsPendingTx,
   CS_LINK_ACCOUNT, CS_PENDING_TX
 } from '../schema';
+import { tiplskConfig } from '../conf';
 
 export class TipLskModule extends BaseModule { 
   public name = 'tiplsk'; 
@@ -30,5 +31,13 @@ export class TipLskModule extends BaseModule {
   public async afterGenesisBlockApply({stateStore}: AfterGenesisBlockApplyContext): Promise<void> {
     await stateStore.chain.set(CS_LINK_ACCOUNT, codec.encode(csLinkAccountSchema, {link: []}));
     await stateStore.chain.set(CS_PENDING_TX, codec.encode(csPendingTxSchema, {tx: []}));
+  };
+
+  public async afterBlockApply?({ stateStore, consensus }: AfterBlockApplyContext): Promise<void> {
+    const buf = await stateStore.chain.get(CS_PENDING_TX);
+    if (!buf) return;
+    const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
+    const data = cs.tx.filter(v => +v.height + tiplskConfig.height.expired > consensus.getFinalizedHeight());
+    await stateStore.chain.set(CS_PENDING_TX, codec.encode(csPendingTxSchema, {tx: data}));
   };
 }

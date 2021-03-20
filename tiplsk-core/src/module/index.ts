@@ -1,13 +1,6 @@
-import { TipLskModule } from './tiplsk_module';
-import {
+export { TipLskModule } from './tiplsk_module';
+export {
   RegistrationAssetID, RegistrationAsset,
   PreRegistrationAssetID, PreRegistrationAsset,
   PreTipAssetID, PreTipAsset
 } from './asset';
-
-export {
-  TipLskModule,
-  RegistrationAssetID, RegistrationAsset,
-  PreRegistrationAssetID, PreRegistrationAsset,
-  PreTipAssetID, PreTipAsset
-}

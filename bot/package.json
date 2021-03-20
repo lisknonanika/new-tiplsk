@@ -9,7 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lisk-sdk": "^5.0.3",
     "twitter-lite": "^1.1.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^14.14.35",
+    "ts-node": "^9.1.1"
+  }
 }

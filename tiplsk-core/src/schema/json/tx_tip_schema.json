@@ -1,7 +1,7 @@
 {
     "$id": "tiplsk/tip/asset",
     "type": "object",
-    "required": ["type", "senderId", "recipientId", "amount"],
+    "required": ["type", "senderId", "recipientId", "recipientNm", "amount"],
     "properties": {
         "txId": {
             "dataType": "bytes",
@@ -19,9 +19,13 @@
             "dataType": "string",
             "fieldNumber": 4
         },
+        "recipientNm": {
+            "dataType": "string",
+            "fieldNumber": 5
+        },
         "amount": {
             "dataType": "uint64",
-            "fieldNumber": 5
+            "fieldNumber": 6
         }
     }
 }

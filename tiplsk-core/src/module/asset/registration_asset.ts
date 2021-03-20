@@ -6,7 +6,6 @@ import {
   TxRegistration, CsLinkAccount, CsLinkAccountElem, CsPendingTx, CsPendingTxElem,
   CS_LINK_ACCOUNT, CS_PENDING_TX
 } from '../../schema';
-import { tiplskConfig } from '../../conf';
 
 export const RegistrationAssetID = 1;
 
@@ -24,15 +23,12 @@ export class RegistrationAsset extends BaseAsset {
   }
 
   public async apply({ asset, stateStore }: ApplyAssetContext<TxRegistration>): Promise<void> {
-    // get block height
-    const currentHeight = BigInt(stateStore.chain.lastBlockHeaders[0].height);
-
     // get chain state - Link account
     const linkAccount = await this.getLinkAccount(asset, stateStore);
-    if (linkAccount)  throw new Error(`Account already exists: Type="${linkAccount.type}", ID="${linkAccount.id}", Address="${linkAccount.address}"`);
+    if (linkAccount)  throw new Error(`Same account already exists: Type="${linkAccount.type}", ID="${linkAccount.id}", Address="${linkAccount.address}"`);
 
     // get chain state - Pending transaction
-    const pendingTx = await this.getPendingTx(asset, stateStore, currentHeight);
+    const pendingTx = await this.getPendingTx(asset, stateStore);
     if (!pendingTx) throw new Error(`Pending Transaction is not found: ID="${asset.txId? bufferToHex(asset.txId): undefined}"`);
     
     // update account
@@ -45,14 +41,14 @@ export class RegistrationAsset extends BaseAsset {
     await this.updateLinkAccount(asset, stateStore);
 
     // update chain state - Pending transaction
-    await this.updatePendingTx(asset, stateStore, currentHeight);
+    await this.updatePendingTx(asset, stateStore);
   }
 
   private async getLinkAccount(asset: TxRegistration, stateStore: StateStore): Promise<CsLinkAccountElem | undefined> {
     const buf = await stateStore.chain.get(CS_LINK_ACCOUNT);
     if (!buf) return undefined;
     const cs = codec.decode<CsLinkAccount>(csLinkAccountSchema, buf);
-    const data = cs.link.find(v => v.type === asset.type && (v.id === asset.senderId || v.address === bufferToHex(asset.address)));
+    const data = cs.link.find(v => v.type === asset.type && v.id === asset.senderId && v.address === bufferToHex(asset.address));
     return data;
   }
 
@@ -61,19 +57,18 @@ export class RegistrationAsset extends BaseAsset {
     let data: CsLinkAccountElem[] = [];
     if (buf) {
       const cs = codec.decode<CsLinkAccount>(csLinkAccountSchema, buf);
-      data = cs.link;
+      data = cs.link.filter(v => v.type !== asset.type || v.id !== asset.senderId);
     }
     data.push({type: asset.type, id: asset.senderId, address: bufferToHex(asset.address)});
     await stateStore.chain.set(CS_LINK_ACCOUNT, codec.encode(csLinkAccountSchema, {link: data}));
   }
 
-  private async getPendingTx(asset: TxRegistration, stateStore: StateStore, currentHeight: bigint): Promise<CsPendingTxElem | undefined> {
+  private async getPendingTx(asset: TxRegistration, stateStore: StateStore): Promise<CsPendingTxElem | undefined> {
     const buf = await stateStore.chain.get(CS_PENDING_TX);
     if (!buf) return undefined;
     const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
     const data = cs.tx.find(v => {
-      return BigInt(v.height) + BigInt(tiplskConfig.height.expired) > currentHeight &&
-             v.type === "registration" &&
+      return v.type === "registration" &&
              asset.txId && v.id === bufferToHex(asset.txId) &&
              asset.type && v.content.type === asset.type &&
              asset.senderId && v.content.senderId === asset.senderId &&
@@ -82,15 +77,12 @@ export class RegistrationAsset extends BaseAsset {
     return data;
   }
   
-  private async updatePendingTx(asset: TxRegistration, stateStore: StateStore, currentHeight: bigint): Promise<void> {
+  private async updatePendingTx(asset: TxRegistration, stateStore: StateStore): Promise<void> {
     const buf = await stateStore.chain.get(CS_PENDING_TX);
     let data: CsPendingTxElem[] = [];
     if (buf) {
       const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
-      data = cs.tx.filter(v => {
-        return BigInt(v.height) + BigInt(tiplskConfig.height.remove) > currentHeight &&
-               (v.type !== "registration" || !asset.txId || v.id !== bufferToHex(asset.txId))
-      });
+      data = cs.tx.filter(v => v.type !== "registration" || !asset.txId || v.id !== bufferToHex(asset.txId));
     }
     await stateStore.chain.set(CS_PENDING_TX, codec.encode(csPendingTxSchema, {tx: data}));
   }

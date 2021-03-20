@@ -19,6 +19,7 @@ export interface TxTip {
 	readonly type: string;
 	readonly senderId: string;
 	readonly recipientId: string;
+	readonly recipientNm: string;
 	readonly amount: bigint;
 }
 
@@ -40,6 +41,7 @@ export interface CsPendingTxElem {
 		readonly type: string;
 		readonly senderId: string;
 		readonly recipientId?: string;
+		readonly recipientNm?: string;
 		readonly address?: string;
 		readonly amount?: string;
 	};

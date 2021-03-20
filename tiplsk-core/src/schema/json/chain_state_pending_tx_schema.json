@@ -24,7 +24,7 @@
                     "content": {
                         "type": "object",
                         "fieldNumber": 4,
-                        "required": ["type"],
+                        "required": ["type", "senderId"],
                         "properties": {
                             "type": {
                                 "dataType": "string",
@@ -38,13 +38,17 @@
                                 "dataType": "string",
                                 "fieldNumber": 3
                             },
-                            "address": {
+                            "recipientNm": {
                                 "dataType": "string",
                                 "fieldNumber": 4
                             },
-                            "amount": {
+                            "address": {
                                 "dataType": "string",
                                 "fieldNumber": 5
+                            },
+                            "amount": {
+                                "dataType": "string",
+                                "fieldNumber": 6
                             }
                         }
                     }

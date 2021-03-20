@@ -23,15 +23,12 @@ export class PreRegistrationAsset extends BaseAsset {
   }
 
   public async apply({ asset, stateStore, reducerHandler, transaction }: ApplyAssetContext<TxRegistration>): Promise<void> {
-    // get block height
-    const currentHeight = BigInt(stateStore.chain.lastBlockHeaders[0].height);
-
-    // get chain state - link account
+    // get chain state - Link account
     const linkAccount = await this.getLinkAccount(asset, stateStore);
-    if (linkAccount)  throw new Error(`Account already exists: Type="${linkAccount.type}", ID="${linkAccount.id}", Address="${linkAccount.address}"`);
-
+    if (linkAccount)  throw new Error(`Same account already exists: Type="${linkAccount.type}", ID="${linkAccount.id}", Address="${linkAccount.address}"`);
+    
     // update chain state - pending transaction
-    await this.updatePendingTxs(asset, stateStore, transaction, currentHeight);
+    await this.updatePendingTxs(asset, stateStore, transaction, stateStore.chain.lastBlockHeaders[0].height);
 
     // faucet
     if (tiplskConfig.faucet.enable) {
@@ -58,17 +55,14 @@ export class PreRegistrationAsset extends BaseAsset {
     const buf = await stateStore.chain.get(CS_LINK_ACCOUNT);
     if (!buf) return undefined;
     const cs = codec.decode<CsLinkAccount>(csLinkAccountSchema, buf);
-    const data = cs.link.find(v => v.type === asset.type && (v.id === asset.senderId || v.address === bufferToHex(asset.address)));
+    const data = cs.link.find(v => v.type === asset.type && v.id === asset.senderId && v.address === bufferToHex(asset.address));
     return data;
   }
 
-  private async updatePendingTxs(asset: TxRegistration, stateStore: StateStore, transaction: Transaction, currentHeight: bigint): Promise<void> {
+  private async updatePendingTxs(asset: TxRegistration, stateStore: StateStore, transaction: Transaction, currentHeight: number): Promise<void> {
     const buf = await stateStore.chain.get(CS_PENDING_TX);
     let data: CsPendingTxElem[] = [];
-    if (buf) {
-      const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
-      data = cs.tx.filter(v => BigInt(v.height) + BigInt(tiplskConfig.height.remove) > currentHeight);
-    }
+    if (buf) data = codec.decode<CsPendingTx>(csPendingTxSchema, buf).tx;
     data.push({
       type: "registration",
       id: bufferToHex(transaction.id),
