@@ -1,0 +1,86 @@
+html {
+  font-size: 10px;
+  background-color: #e4e5e7;
+}
+
+input, div, li {
+  font-size: 1.6rem;
+}
+
+ul {
+  list-style-type: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+button {
+  background-color: #07a38e;
+  color: #ffffff;
+  border-radius: 5px;
+  border: 0px;
+  box-shadow: 0 0px 10px rgba(0,0,0,0.2);
+  padding: 10px 20px;
+  text-decoration :none;
+  outline: none; 
+}
+
+.App-header {
+  background-color: #2e4a81;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  font-size: calc(10px + 4vmin);
+  font-weight: bold;
+  padding: 10px;
+}
+
+.App-link {
+  color: white;
+  text-decoration: none;
+}
+
+.App-footer {
+  background-color: #2e4a81;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding: 5px 0px;
+}
+
+.App-contents {
+  display: block;
+  padding: 0px 10px 50px 10px;
+}
+
+.center {
+  text-align: center;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.note {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.link {
+  color: #61dafb;
+  margin: 0px 10px;
+}
+
+.link2 {
+  color: #2e4a81;
+}
