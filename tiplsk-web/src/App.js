@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { Home, User, Transaction, HowTo, Information } from './page';
-import './Common.css';
+import './App.css';
 
 class App extends Component {
   constructor(props){

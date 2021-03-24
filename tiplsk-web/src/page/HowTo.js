@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import '../Common.css';
+import '../App.css';
 
 class HowTo extends Component {
   render() {

@@ -46,7 +46,7 @@ const getDM = async(next_cursor: string, remaining: number, isStart: boolean): P
   }
 
   // 次カーソルがない または 同値の場合終了
-  if (!data.next_cursor || data.next_cursor === next_cursor) return [];
+  if (data.next_cursor && data.next_cursor === next_cursor) return [];
 
   // 対象IDまで配列に設定
   const ret = [];

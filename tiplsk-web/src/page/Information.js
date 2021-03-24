@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import * as fa from 'react-icons/fa';
-import '../Common.css';
+import '../App.css';
 
 class Information extends Component {
   render() {

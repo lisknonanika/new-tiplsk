@@ -3,8 +3,23 @@ html {
   background-color: #e4e5e7;
 }
 
-input, div, li {
+div, li {
+  font-size: 1.4rem;
+}
+
+input {
   font-size: 1.6rem;
+}
+
+input:read-only{
+  padding: 10px 35px 10px 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5);;
+  background-color: rgba(255,255,255,0.5);
+  width: -webkit-fill-available;
+  max-width: 500px;
+  text-decoration :none;
+  outline: none; 
 }
 
 ul {
@@ -67,7 +82,25 @@ button {
   text-align: center;
 }
 
+.small {
+  font-size: 1.2rem;
+}
+
+.copy-text {
+  position: relative;
+  max-width: 500px;
+  margin: auto;
+}
+
+.copy-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #333;
+}
+
 .label {
+  font-size: 1.6rem;
   font-weight: bold;
 }
 
