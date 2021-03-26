@@ -27,6 +27,7 @@ export class PreTipAsset extends BaseAsset {
     // get chain state
     const linkAccount = await this.getLinkAccount(asset, stateStore);
     if (!linkAccount) throw new Error(`Account is unregistered: Type="${asset.type}", ID="${asset.senderId}"`);
+    if (linkAccount.address !== bufferToHex(transaction.senderAddress)) throw new Error(`Address missmatch: Type="${asset.type}", ID="${asset.senderId}"`);
 
     // update chain state - pending transaction
     await this.updatePendingTxs(asset, stateStore, transaction, stateStore.chain.lastBlockHeaders[0].height);

@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lisk-sdk": "^5.0.3"
+    "lisk-sdk": "^5.0.4"
   },
   "devDependencies": {
     "ts-node": "^9.1.1"

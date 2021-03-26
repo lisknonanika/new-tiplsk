@@ -33,11 +33,11 @@ export class TipLskModule extends BaseModule {
     await stateStore.chain.set(CS_PENDING_TX, codec.encode(csPendingTxSchema, {tx: []}));
   };
 
-  public async afterBlockApply?({ stateStore, consensus }: AfterBlockApplyContext): Promise<void> {
+  public async afterBlockApply?({ stateStore, block }: AfterBlockApplyContext): Promise<void> {
     const buf = await stateStore.chain.get(CS_PENDING_TX);
     if (!buf) return;
     const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
-    const data = cs.tx.filter(v => +v.height + tiplskConfig.height.expired > consensus.getFinalizedHeight());
+    const data = cs.tx.filter(v => +v.height + tiplskConfig.height.expired > block.header.height);
     await stateStore.chain.set(CS_PENDING_TX, codec.encode(csPendingTxSchema, {tx: data}));
   };
 }

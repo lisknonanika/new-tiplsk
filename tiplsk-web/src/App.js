@@ -41,8 +41,8 @@ class App extends Component {
               <Route path="/" exact component={Home} />
               <Route path="/howto" component={HowTo} />
               <Route path="/information" component={Information} />
-              <Route path="/accounts/:uid"  component={User} />
-              <Route path="/transactions/:tid"  component={Transaction} />
+              <Route path="/accounts/:userid"  component={User} />
+              <Route path="/transactions/:txid"  component={Transaction} />
             </div>
             <footer className="App-footer">
               <Link to="/howto" className="link">HowTo</Link>

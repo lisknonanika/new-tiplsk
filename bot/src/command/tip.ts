@@ -1,6 +1,6 @@
 import { APIClient, createWSClient } from '@liskhq/lisk-api-client';
 import { bufferToHex } from '@liskhq/lisk-cryptography';
-import { convertBeddowsToLSK } from '@liskhq/lisk-transactions';
+import { convertLSKToBeddows } from '@liskhq/lisk-transactions';
 import { RPC_ENDPOINT, TIPLSK } from '../const';
 import { CommandResult, Tip } from '../type';
 
@@ -25,7 +25,7 @@ export const execute = async(type: string, command: string, senderId: string, re
       senderId: senderId,
       recipientId: recipientId,
       recipientNm: recipientNm,
-      amount: BigInt(convertBeddowsToLSK(amount))
+      amount: BigInt(convertLSKToBeddows(amount))
     }
     const tx = await createTx(client, asset);
     await client.transaction.send(tx);

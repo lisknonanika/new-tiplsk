@@ -2,7 +2,7 @@
 import { Component } from 'react';
 
 class Transaction extends Component {
-  render() {
+  render = () => {
     return (
       <div>
         Transaction

@@ -34,7 +34,7 @@ class Home extends Component {
     window.alert("コピーしました！")
   }
 
-  render() {
+  render = () => {
     return (
       <div className="center">
         <div className="label">はじめに</div>

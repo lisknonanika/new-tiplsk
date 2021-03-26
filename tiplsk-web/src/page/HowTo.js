@@ -2,7 +2,7 @@ import { Component } from 'react';
 import '../App.css';
 
 class HowTo extends Component {
-  render() {
+  render = () => {
     return (
       <div>
       </div>

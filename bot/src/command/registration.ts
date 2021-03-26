@@ -16,8 +16,7 @@ export const execute = async(type: string, command: string, senderId: string): P
   try {
     client = await createWSClient(RPC_ENDPOINT);
     const words: string[] = command.split(/\s/g);
-    // const address = getAddressFromBase32Address(words[words.length -1], "tip");  // TODO https://github.com/LiskHQ/lisk-sdk/issues/6185
-    const address = getAddressFromBase32Address(`lsk${words[words.length -1].slice(3)}`);
+    const address = getAddressFromBase32Address(words[words.length -1], "tip");
 
     const asset: Registration = {
       type: type.toLowerCase(),
