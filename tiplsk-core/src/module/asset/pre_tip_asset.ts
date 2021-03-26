@@ -5,6 +5,7 @@ import {
   TxTip, CsLinkAccount, CsLinkAccountElem, CsPendingTx, CsPendingTxElem,
   CS_LINK_ACCOUNT, CS_PENDING_TX
 } from '../../schema';
+import { tiplskConfig } from '../../conf';
 
 export const PreTipAssetID = 10;
 
@@ -13,12 +14,13 @@ export class PreTipAsset extends BaseAsset {
   id = PreTipAssetID;
   schema = txTipSchema;
 
-  public validate({ asset }: ValidateAssetContext<TxTip>): void {
+  public validate({ asset, transaction }: ValidateAssetContext<TxTip>): void {
     if (!asset.type) throw new Error(`Invalid parameter: "content.type"`);
     if (!asset.senderId) throw new Error(`Invalid parameter: "content.senderId"`);
     if (!asset.recipientId) throw new Error(`Invalid parameter: "content.recipientId"`);
     if (!asset.recipientNm) throw new Error(`Invalid parameter: "content.recipientNm"`);
     if (!asset.amount) throw new Error(`Invalid parameter: "content.amount"`);
+    if (bufferToHex(transaction.senderAddress) !== tiplskConfig.address) throw new Error(`Sender is not TipLSK."`);
   }
 
   public async apply({ asset, stateStore, transaction }: ApplyAssetContext<TxTip>): Promise<void> {

@@ -16,10 +16,11 @@ export class PreRegistrationAsset extends BaseAsset {
   id = PreRegistrationAssetID;
   schema = txRegistrationSchema;
 
-  public validate({ asset }: ValidateAssetContext<TxRegistration>): void {
+  public validate({ asset, transaction }: ValidateAssetContext<TxRegistration>): void {
     if (!asset.type) throw new Error(`Invalid parameter: "content.type"`);
     if (!asset.senderId) throw new Error(`Invalid parameter: "content.senderId"`);
     if (!asset.address) throw new Error(`Invalid parameter: "content.address"`);
+    if (bufferToHex(transaction.senderAddress) !== tiplskConfig.address) throw new Error(`Sender is not TipLSK."`);
   }
 
   public async apply({ asset, stateStore, reducerHandler, transaction }: ApplyAssetContext<TxRegistration>): Promise<void> {
