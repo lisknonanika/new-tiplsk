@@ -11,7 +11,7 @@ export {
 
 export {
   TipLskAccount,
-  TxRegistration, TxTip,
+  TxBase, TxRegistration, TxTip,
   CsLinkAccount, CsLinkAccountElem,
   CsPendingTx, CsPendingTxElem
 } from './type';
