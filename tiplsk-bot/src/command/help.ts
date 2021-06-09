@@ -9,10 +9,10 @@ export const execute = async(type: string, senderId: string): Promise<CommandRes
   try {
     client = await createWSClient(RPC_ENDPOINT);
     const ret = await client.invoke<LinkAccount>("tiplsk:linkAccount");
-    if (!ret || !ret.link) return {result: true, message: "Not Link"};
+    if (!ret || !ret.link) return {result: true, message: "Not Register"};
     const account = ret.link.find(v => v.type === type && v.id === senderId);
-    if (!account) return {result: true, message: "Not Link"};
-    return {result: true, data: `Address: ${getBase32AddressFromAddress(hexToBuffer(account.id), "tip")}`};
+    if (!account) return {result: true, message: "Not Register"};
+    return {result: true, message: getBase32AddressFromAddress(hexToBuffer(account.id), "tip")};
 
   } catch (err) {
     console.log(err);

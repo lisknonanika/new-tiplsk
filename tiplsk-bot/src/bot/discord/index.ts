@@ -1,5 +1,6 @@
 import * as discord from 'discord.js';
 import * as conf from './conf';
+import { help } from '../../command';
 
 const client = new discord.Client();    
 
@@ -21,7 +22,8 @@ client.on("message", async message => {
     const author = message.author;
 
     if (conf.COMMANDS.help.test(content)) {
-      await author.send("help command!");
+      const ret = await help.execute(conf.TYPE, author.id);
+      if (ret.result) await author.send(`\`\`\`${conf.HELP_TEXT}\r\n[Your Address]\r\n${ret.message}\`\`\``);
 
     } else if (conf.COMMANDS.balance.test(content)) {
       await author.send("balance command!");
