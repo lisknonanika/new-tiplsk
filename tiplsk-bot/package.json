@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "discord.js": "^12.5.3",
     "lisk-sdk": "^5.1.0"
   },
   "devDependencies": {
