@@ -3,8 +3,6 @@ import { bufferToHex, getAddressFromBase32Address } from '@liskhq/lisk-cryptogra
 import { RPC_ENDPOINT, TIPLSK } from '../const';
 import { CommandResult, Registration } from '../type';
 
-let client: APIClient | undefined = undefined;
-
 const createTx = async (client: APIClient, asset: Registration): Promise<Record<string, unknown>> => {
   const preTx = await client.transaction.create({moduleID: 3000, assetID: 0, fee: BigInt(0), asset: asset}, TIPLSK.PASSPHRASE);
   const fee = client.transaction.computeMinFee(preTx);
@@ -12,16 +10,16 @@ const createTx = async (client: APIClient, asset: Registration): Promise<Record<
   return await client.transaction.create({moduleID: 3000, assetID: 0, fee: txFee, asset: asset}, TIPLSK.PASSPHRASE)
 }
 
-export const execute = async(type: string, command: string, senderId: string): Promise<CommandResult> => {
+export const execute = async(type: string, senderId: string, address: string): Promise<CommandResult> => {
+  let client: APIClient | undefined = undefined;
+
   try {
     client = await createWSClient(RPC_ENDPOINT);
-    const words: string[] = command.split(/\s/g);
-    const address = getAddressFromBase32Address(words[words.length -1], "tip");
 
     const asset: Registration = {
       type: type.toLowerCase(),
       senderId: senderId,
-      address: address
+      address: getAddressFromBase32Address(address, "tip")
     }
     const tx = await createTx(client, asset);
     await client.transaction.send(tx);

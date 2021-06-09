@@ -1,18 +1,20 @@
 import { APIClient, createWSClient } from '@liskhq/lisk-api-client';
-import { getAddressFromBase32Address } from '@liskhq/lisk-cryptography';
+import { hexToBuffer } from '@liskhq/lisk-cryptography';
 import { convertLSKToBeddows } from '@liskhq/lisk-transactions';
 import { RPC_ENDPOINT } from '../const';
-import { CommandResult } from '../type';
+import { LinkAccount, CommandResult } from '../type';
 
-let client: APIClient | undefined = undefined;
-
-export const execute = async(command: string): Promise<CommandResult> => {
+export const execute = async(type: string, senderId: string): Promise<CommandResult> => {
+  let client: APIClient | undefined = undefined;
+  
   try {
     client = await createWSClient(RPC_ENDPOINT);
-    const words: string[] = command.split(/\s/g);
-    const address = words[words.length -1];
-
-    const ret = await client.account.get(getAddressFromBase32Address(address)) as any;
+    const linkResult = await client.invoke<LinkAccount>("tiplsk:linkAccount");
+    if (!linkResult || !linkResult.link) return {result: false, message: "Not Link"};
+    const account = linkResult.link.find(v => v.type === type && v.id === senderId);
+    if (!account) return {result: false, message: "Not Link"};
+    
+    const ret = await client.account.get(hexToBuffer(account.id)) as any;
     if (!ret || !ret.data) return { result: false, message: "Address not found."};
     return {result: true, data: convertLSKToBeddows(ret.data.token.balance.toString())};
 

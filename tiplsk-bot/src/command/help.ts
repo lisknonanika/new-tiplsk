@@ -3,16 +3,16 @@ import { hexToBuffer, getBase32AddressFromAddress } from '@liskhq/lisk-cryptogra
 import { RPC_ENDPOINT } from '../const';
 import { LinkAccount, CommandResult } from '../type';
 
-let client: APIClient | undefined = undefined;
-
 export const execute = async(type: string, senderId: string): Promise<CommandResult> => {
+  let client: APIClient | undefined = undefined;
+
   try {
     client = await createWSClient(RPC_ENDPOINT);
     const ret = await client.invoke<LinkAccount>("tiplsk:linkAccount");
     if (!ret || !ret.link) return {result: true, message: "Not Link"};
     const account = ret.link.find(v => v.type === type && v.id === senderId);
     if (!account) return {result: true, message: "Not Link"};
-    return {result: true, message: `Address: ${getBase32AddressFromAddress(hexToBuffer(account.id), "tip")}`};
+    return {result: true, data: `Address: ${getBase32AddressFromAddress(hexToBuffer(account.id), "tip")}`};
 
   } catch (err) {
     console.log(err);

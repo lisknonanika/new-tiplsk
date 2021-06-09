@@ -4,8 +4,6 @@ import { convertLSKToBeddows } from '@liskhq/lisk-transactions';
 import { RPC_ENDPOINT, TIPLSK } from '../const';
 import { CommandResult, Tip } from '../type';
 
-let client: APIClient | undefined = undefined;
-
 const createTx = async (client: APIClient, asset: Tip): Promise<Record<string, unknown>> => {
   const preTx = await client.transaction.create({moduleID: 3000, assetID: 10, fee: BigInt(0), asset: asset}, TIPLSK.PASSPHRASE);
   const fee = client.transaction.computeMinFee(preTx);
@@ -13,12 +11,11 @@ const createTx = async (client: APIClient, asset: Tip): Promise<Record<string, u
   return await client.transaction.create({moduleID: 3000, assetID: 10, fee: txFee, asset: asset}, TIPLSK.PASSPHRASE)
 }
 
-export const execute = async(type: string, command: string, senderId: string, recipientId: string): Promise<CommandResult> => {
+export const execute = async(type: string, senderId: string, recipientId: string, recipientNm: string, amount: string): Promise<CommandResult> => {
+  let client: APIClient | undefined = undefined;
+
   try {
     client = await createWSClient(RPC_ENDPOINT);
-    const words: string[] = command.split(/\s/g);
-    const recipientNm = words[words.length -2];
-    const amount = words[words.length -1];
   
     const asset: Tip = {
       type: type.toLowerCase(),

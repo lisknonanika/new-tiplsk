@@ -4,22 +4,27 @@ import * as conf from './conf';
 const client = new discord.Client();    
 
 client.on("ready", ()=> {
-    console.log("ready...");
+    console.log("TipLSK - ready...");
 });
 
 client.on("message", async message => {
-  const botId = client.user?.id? client.user?.id: "";
-  if(message.author.id === botId ||message.author.bot ||
-     !(message.channel instanceof discord.DMChannel || message.mentions.has(botId))){
-      return;
-  }
-
-  const content = message.content.trim().replace(/\s+/g," ");
-  const author = message.author;
-
   try {
+    const botId = client.user?.id? client.user?.id: "";
+    if(message.author.id === botId || message.author.bot ||
+      !(message.channel instanceof discord.DMChannel || message.mentions.has(botId))){
+        return;
+    }
+
+    const content = message.content.trim().replace(/\s+/g," ");
+    if (!content) return;
+    
+    const author = message.author;
+
     if (conf.COMMANDS.help.test(content)) {
       await author.send("help command!");
+
+    } else if (conf.COMMANDS.balance.test(content)) {
+      await author.send("balance command!");
 
     } else if (conf.COMMANDS.reg.test(content)) {
       const matches = content.match(conf.COMMANDS.reg);
