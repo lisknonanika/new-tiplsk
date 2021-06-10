@@ -11,10 +11,8 @@ client.on("ready", ()=> {
 client.on("message", async message => {
   try {
     const botId = client.user?.id? client.user?.id: "";
-    if(message.author.id === botId || message.author.bot ||
-      !(message.channel instanceof discord.DMChannel || message.mentions.has(botId))){
-        return;
-    }
+    if(message.author.id === botId || message.author.bot) return;
+    if (message.channel.type !== "dm" && (conf.DM_ONLY || !message.mentions.has(botId))) return;
 
     const content = message.content.trim().replace(/\s+/g," ");
     if (!content) return;
@@ -23,7 +21,7 @@ client.on("message", async message => {
 
     if (conf.COMMANDS.help.test(content)) {
       const ret = await help.execute(conf.TYPE, author.id);
-      if (ret.result) await author.send(`\`\`\`${conf.HELP_TEXT}\r\n[Your Address]\r\n${ret.message}\`\`\``);
+      if (ret.result) await author.send(`${conf.MESSAGE.HELP}${ret.message}`);
 
     } else if (conf.COMMANDS.balance.test(content)) {
       await author.send("balance command!");
