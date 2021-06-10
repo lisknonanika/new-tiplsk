@@ -30,7 +30,7 @@ export const execute = async(type: string, senderId: string, recipientId: string
 
   } catch (err) {
     console.log(err);
-    return {result: false, message: err.message? err.message: "system error"}
+    return {result: false, data: err.message? err.message: "system error"}
     
   } finally {
     if (client) await client.disconnect();

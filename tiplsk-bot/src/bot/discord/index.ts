@@ -1,51 +1,96 @@
 import * as discord from 'discord.js';
 import * as conf from './conf';
-import { help } from '../../command';
+import { WEB_URL } from '../../const';
+import { help, balance, registration, tip } from '../../command';
 
-const client = new discord.Client();    
+const client = new discord.Client();
+
+const runHelpCommand = async(author:discord.User) => {
+  // command execute
+  const ret = await help.execute(conf.TYPE, author.id);
+  
+  // send message
+  if (ret.result) await author.send(`${conf.MESSAGE.HELP}${ret.data}`);
+  else await author.send(`${conf.MESSAGE.ERROR}${ret.data}`);
+}
+
+const runBalanceCommand = async(author:discord.User) => {
+  // command execute
+  const ret = await balance.execute(conf.TYPE, author.id);
+  
+  // send message
+  if (ret.result) await author.send(`${conf.MESSAGE.BALANCE}${ret.data}`);
+  else await author.send(`${conf.MESSAGE.ERROR}${ret.data}`);
+}
+
+const runRegistrationCommand = async(author:discord.User, content:string) => {
+  const matches = content.match(conf.COMMANDS.reg);
+  const command = matches? matches[0].trim(): "";
+  const address = command.split(" ")[1].trim();
+
+  // command execute
+  const ret = await registration.execute(conf.TYPE, author.id, address);
+
+  // send message
+  if (ret.result) await author.send(`${conf.MESSAGE.REGISTRATION}${WEB_URL}/transactions/${ret.data}`);
+  else await author.send(`${conf.MESSAGE.ERROR}${ret.data}`);
+}
+
+const runTipCommand = async(author:discord.User, users:discord.Collection<string, discord.User>, content:string) => {
+  const matches = content.match(conf.COMMANDS.tip);
+  const command = matches? matches[0].trim(): "";
+  const arr = command.split(" ");
+  const amount = arr[1];
+  const recipient = arr[2];
+  for (const user of users) {
+    if (recipient !== `<@!${user[1].id}>`) continue;
+  
+    // command execute
+    const ret = await tip.execute(conf.TYPE, author.id, user[1].id, user[1].username, amount);
+
+    // send message
+    if (ret.result) await author.send(`${conf.MESSAGE.TIP}${WEB_URL}/transactions/${ret.data}`);
+    else await author.send(`${conf.MESSAGE.ERROR}${ret.data}`);
+    break;
+  }
+}
 
 client.on("ready", ()=> {
-    console.log("TipLSK - ready...");
+  console.log("TipLSK - ready...");
 });
 
 client.on("message", async message => {
-  try {
-    const botId = client.user?.id? client.user?.id: "";
-    if(message.author.id === botId || message.author.bot) return;
-    if (message.channel.type !== "dm" && (conf.DM_ONLY || !message.mentions.has(botId))) return;
+  const botId = client.user?.id? client.user?.id: "";
+  if(message.author.id === botId || message.author.bot) return;
+  if (message.channel.type !== "dm" && (conf.DM_ONLY || !message.mentions.has(botId))) return;
 
-    const content = message.content.trim().replace(/\s+/g," ");
-    if (!content) return;
-    
-    const author = message.author;
+  const content = message.content.trim().replace(/\s+/g," ");
+  if (!content) return;
+  
+  const author = message.author;
 
-    if (conf.COMMANDS.help.test(content)) {
-      const ret = await help.execute(conf.TYPE, author.id);
-      if (ret.result) await author.send(`${conf.MESSAGE.HELP}${ret.message}`);
+  // help command
+  if (conf.COMMANDS.help.test(content)) {
+    await runHelpCommand(author);
+    return;
+  }
 
-    } else if (conf.COMMANDS.balance.test(content)) {
-      await author.send("balance command!");
+  // balance command
+  if (conf.COMMANDS.balance.test(content)) {
+    await runBalanceCommand(author);
+    return;
+  }
 
-    } else if (conf.COMMANDS.reg.test(content)) {
-      const matches = content.match(conf.COMMANDS.reg);
-      const command = matches? matches[0].trim(): "";
-      const address = command.split(" ")[1];
-      await author.send(`reg command! address=${address}`);
-      
-    } else if (conf.COMMANDS.tip.test(content)) {
-      const matches = content.match(conf.COMMANDS.tip);
-      const command = matches? matches[0].trim(): "";
-      const arr = command.split(" ");
-      const amount = arr[1];
-      const recipient = arr[2];
-      for (const user of message.mentions.users) {
-        if (recipient !== `<@!${user[1].id}>`) continue;
-        await author.send(`tip command! target=${user[1].id} amount=${amount}`);
-        break;
-      }
-    }
-  } catch (error) {
-    console.log(error);
+  // registration command
+  if (conf.COMMANDS.reg.test(content)) {
+    await runRegistrationCommand(author, content);
+    return;
+  }
+  
+  // tip command
+  if (conf.COMMANDS.tip.test(content)) {
+    await runTipCommand(author, message.mentions.users, content);
+    return;
   }
 });
 

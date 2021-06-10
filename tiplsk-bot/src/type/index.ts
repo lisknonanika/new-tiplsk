@@ -1,7 +1,6 @@
 export interface CommandResult {
 	result: boolean;
-	data?: string;
-	message?: string;
+	data: string;
 }
 
 export interface Registration extends Record<string, unknown> {
