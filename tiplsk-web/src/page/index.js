@@ -1,12 +1,10 @@
 import Home from './Home';
 import User  from './User';
 import Transaction from './Transaction';
-import HowTo from './HowTo';
-import Information from './Information';
+import Help from './Help';
 export {
   Home,
   User,
   Transaction,
-  HowTo,
-  Information
+  Help
 }

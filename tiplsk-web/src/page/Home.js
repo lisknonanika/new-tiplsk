@@ -1,18 +1,16 @@
 import { Component } from 'react';
 import { Mnemonic } from '@liskhq/lisk-passphrase';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 import { getBase32AddressFromPassphrase } from '@liskhq/lisk-cryptography';
 import * as fa from 'react-icons/fa';
 import '../App.css';
 
+const MySwal = withReactContent(Swal);
+
 class Home extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      account: {
-        passphrase: "",
-        address: ""
-      }
-    }
     this.getAddressAndPassphrase = this.getAddressAndPassphrase.bind(this);
     this.copyText = this.copyText.bind(this);
   }
@@ -20,40 +18,34 @@ class Home extends Component {
   getAddressAndPassphrase = (e) => {
     const passphrase = Mnemonic.generateMnemonic();
     const address = getBase32AddressFromPassphrase(passphrase, "tip");
-    this.setState({
-      account: {
-        passphrase: passphrase,
-        address: address
-      }
+    MySwal.fire({
+      title: "Generated your account",
+      icon: "success",
+      html: (
+        <div style={{paddingTop: "10px"}}>
+        <div className="copy-text">
+          <div className="copy-icon"><fa.FaCopy/></div>
+          <textarea value={`<address>\r\n${address}\r\n\r\n<passphrase>\r\n${passphrase}`} readOnly onClick={this.copyText} rows="8"/>
+        </div>
+        <div className="alert note">* Don't forget your passphrase.</div>
+      </div>
+      ),
+      confirmButtonColor: "#3085d6",
+      allowOutsideClick: false
     });
   }
 
   copyText = (e) => {
+    if (!e.target.value) return;
     e.target.select();
     document.execCommand('copy');
-    window.alert("コピーしました！")
+    window.alert("copied!")
   }
 
   render = () => {
     return (
       <div className="center">
-        <div className="label">はじめに</div>
-        <div className="note">
-          TipLSKを使うためにはTipLSKアドレスが必要だよ。
-          <br></br>
-          持ってない人は下のボタンから生成してね。
-        </div>
-        <button onClick={this.getAddressAndPassphrase}>TipLSKちゃんアドレスを作成する</button>
-        {this.state.account.address !==""?
-          <div style={{paddingTop: "10px"}}>
-            <div className="label" style={{paddingTop: "10px"}}>- アドレス -</div>
-            <div className="copy-text"><div className="copy-icon"><fa.FaCopy/></div><input type="text" value={this.state.account.address} readOnly onClick={this.copyText}/></div>
-            <div className="label" style={{paddingTop: "10px"}}>- パスフレーズ -</div>
-            <div className="copy-text"><div className="copy-icon"><fa.FaCopy/></div><input type="text" value={this.state.account.passphrase} readOnly onClick={this.copyText}/></div>
-            <div className="note small">※アドレスとパスフレーズは忘れないでね。</div>
-          </div>
-        : ""}
-        <div className="note" style={{paddingTop: "20px"}}>使い方は<a href="./howto" target="_" className="link2">HowTo</a>を見てね。</div>
+        <button onClick={this.getAddressAndPassphrase}>Generate TipLSK Address</button>
       </div>
     );
   }

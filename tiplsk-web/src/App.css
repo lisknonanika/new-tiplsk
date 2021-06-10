@@ -7,19 +7,9 @@ div, li {
   font-size: 1.4rem;
 }
 
-input {
+input,
+textarea {
   font-size: 1.6rem;
-}
-
-input:read-only{
-  padding: 10px 35px 10px 5px;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.5);;
-  background-color: rgba(255,255,255,0.5);
-  width: -webkit-fill-available;
-  max-width: 500px;
-  text-decoration :none;
-  outline: none; 
 }
 
 ul {
@@ -40,7 +30,8 @@ button {
   box-shadow: 0 0px 10px rgba(0,0,0,0.2);
   padding: 10px 20px;
   text-decoration :none;
-  outline: none; 
+  outline: none;
+  font-size: 1.8rem;
 }
 
 .App-header {
@@ -52,9 +43,12 @@ button {
   position: fixed;
   top: 0;
   width: 100vw;
-  font-size: calc(10px + 4vmin);
   font-weight: bold;
   padding: 10px;
+}
+
+.App-title {
+  font-size: 25px;
 }
 
 .App-link {
@@ -75,7 +69,7 @@ button {
 
 .App-contents {
   display: block;
-  padding: 0px 10px 50px 10px;
+  padding: 80px 10px 50px 10px;
 }
 
 .center {
@@ -84,19 +78,6 @@ button {
 
 .small {
   font-size: 1.2rem;
-}
-
-.copy-text {
-  position: relative;
-  max-width: 500px;
-  margin: auto;
-}
-
-.copy-icon {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  color: #333;
 }
 
 .label {
@@ -116,4 +97,48 @@ button {
 
 .link2 {
   color: #2e4a81;
+}
+
+.alert {
+  color: #df2d2d;
+  font-weight: bold;
+}
+
+/*
+ * SweetAlert2
+ */
+.swal2-popup {
+  background-color: #f0f1f1;
+  min-width: 320px;
+  width: 800px;
+}
+
+.swal2-popup button {
+  width: 90%;
+  padding: 10px 5px;
+  font-size: 1.8rem !important;
+}
+
+.swal2-popup .copy-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #333;
+}
+
+.swal2-popup .copy-text {
+  position: relative;
+  max-width: 750px;
+  margin: auto;
+}
+
+.swal2-popup textarea:read-only {
+  padding: 10px 35px 10px 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: rgba(150, 150, 150, 0.1);
+  width: -webkit-fill-available;
+  text-decoration :none;
+  outline: none;
+  resize: none;
 }
