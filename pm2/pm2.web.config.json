@@ -1,0 +1,5 @@
+{
+  "name" : "tiplsk-web",
+  "cwd": "./new-tiplsk/tiplsk-web/",
+  "script" : "node_modules/react-scripts/scripts/start.js"
+}

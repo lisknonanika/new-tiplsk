@@ -1,0 +1,5 @@
+{
+  "name" : "tiplsk-core",
+  "cwd": "./new-tiplsk/tiplsk-core/",
+  "script" : "dist/index.js"
+}

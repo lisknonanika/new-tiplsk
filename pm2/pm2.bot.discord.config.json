@@ -1,0 +1,5 @@
+{
+  "name" : "tiplsk-bot-discord",
+  "cwd": "./new-tiplsk/tiplsk-bot/",
+  "script" : "dist/bot/discord/index.js"
+}
