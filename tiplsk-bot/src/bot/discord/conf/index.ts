@@ -8,7 +8,7 @@ export const COMMANDS = {
   tip: /(\s|^)!tip(\s+)([0]{1}|([1-9]{1}[0-9]{0,4}))(\.[0-9]{0,8})?(\s+)(<@![a-z0-9]+>)(\s|$)/,
 };
 export const MESSAGE = {
-  ERROR: "**[Error]**\r\n",
+  ERROR: "**[Error]**",
   HELP: "**[Command List]**\r\n" +
         "**!help** - Display command list and registered tiplsk address.\r\n" +
         "> e.g. !help\r\n" +
@@ -21,13 +21,11 @@ export const MESSAGE = {
         "\r\n" +
         "**!tip** [`tip amount`] [`recipient`] - Send tip to user.\r\n" +
         "> * [amount]: min=0.00000001 max=99999.99999999\r\n" +
-        "> e.g. !tip `1.2345` `@mdmg`\r\n" +
-        "\r\n" +
-        "**[Your Address]**\r\n",
-  BALANCE: "**[Your Balance]**\r\n",
+        "> e.g. !tip `1.2345` `@mdmg`",
+  BALANCE: "**[Your Balance]**",
   REGISTRATION: "**[Registration]**\r\n"+
-                "To complete the process, please access the following URL and enter your passphrase.\r\n",
+                "To complete the process, please access the following URL and enter your passphrase.",
   TIP: "**[Tip]**\r\n"+
-       "To complete the process, please access the following URL and enter your passphrase.\r\n"
+       "To complete the process, please access the following URL and enter your passphrase."
 }
   
