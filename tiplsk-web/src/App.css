@@ -42,13 +42,24 @@ button {
   justify-content: center;
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: calc(100% - 20px);
   font-weight: bold;
   padding: 10px;
 }
 
 .App-title {
   font-size: 25px;
+}
+
+.App-help {
+  position: absolute;
+  top: 13px;
+  right: 0;
+}
+
+.App-help a {
+  font-size: 25px;
+  color: #fff !important;
 }
 
 .App-link {
@@ -63,7 +74,8 @@ button {
   justify-content: center;
   position: fixed;
   bottom: 0;
-  width: 100vw;
+  min-height: 5px;
+  width: 100%;
   padding: 5px 0px;
 }
 
