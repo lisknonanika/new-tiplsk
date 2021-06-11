@@ -26,7 +26,7 @@ export interface TxTip {
 export interface CsLinkAccountElem {
 	readonly type: string;
 	readonly id: string;
-	readonly address: string;
+	readonly address: Buffer;
 }
 
 export interface CsLinkAccount {
@@ -35,14 +35,15 @@ export interface CsLinkAccount {
 
 export interface CsPendingTxElem {
 	readonly type: string;
-	readonly id: string;
-	readonly height: string;
+	readonly id: Buffer;
+	readonly height: number;
+	readonly expHeight: number;
 	readonly content: {
 		readonly type: string;
 		readonly senderId: string;
 		readonly recipientId?: string;
 		readonly recipientNm?: string;
-		readonly address?: string;
+		readonly address?: Buffer;
 		readonly amount?: string;
 	};
 }

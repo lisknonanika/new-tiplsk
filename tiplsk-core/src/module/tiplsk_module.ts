@@ -5,7 +5,6 @@ import {
   CsLinkAccount, CsPendingTx,
   CS_LINK_ACCOUNT, CS_PENDING_TX
 } from '../schema';
-import { tiplskConfig } from '../conf';
 
 export class TipLskModule extends BaseModule { 
   public name = 'tiplsk'; 
@@ -37,7 +36,7 @@ export class TipLskModule extends BaseModule {
     const buf = await stateStore.chain.get(CS_PENDING_TX);
     if (!buf) return;
     const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
-    const data = cs.tx.filter(v => +v.height + tiplskConfig.height.expired > block.header.height);
+    const data = cs.tx.filter(v => +v.expHeight > block.header.height);
     await stateStore.chain.set(CS_PENDING_TX, codec.encode(csPendingTxSchema, {tx: data}));
   };
 }

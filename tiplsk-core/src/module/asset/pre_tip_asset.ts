@@ -1,6 +1,6 @@
 import { BaseAsset, ValidateAssetContext, ApplyAssetContext } from 'lisk-sdk';
 import { bufferToHex } from '@liskhq/lisk-cryptography';
-import { txTipSchema, TxTip } from '../../schema';
+import { txTipSchema, TxTip, CsPendingTxElem } from '../../schema';
 import { tiplskConfig } from '../../conf';
 import * as common from '../../common';
 
@@ -22,15 +22,15 @@ export class PreTipAsset extends BaseAsset {
 
   public async apply({ asset, stateStore, transaction }: ApplyAssetContext<TxTip>): Promise<void> {
     // get chain state
-    const linkAccount = await common.getLinkAccount(asset.type, asset.senderId, "", stateStore);
-    if (!linkAccount) throw new Error(`Account is unregistered: Type="${asset.type}", ID="${asset.senderId}"`);
-    if (linkAccount.address !== bufferToHex(transaction.senderAddress)) throw new Error(`Address missmatch: Type="${asset.type}", ID="${asset.senderId}"`);
+    const linkAccount = await common.getLinkAccount(asset.type, asset.senderId, null, stateStore);
+    if (!linkAccount) throw new Error(`Account is unregistered.`);
 
     // update chain state - pending transaction
-    const param = {
+    const param: CsPendingTxElem = {
       type: "tip",
-      id: bufferToHex(transaction.id),
-      height: stateStore.chain.lastBlockHeaders[0].height.toString(),
+      id: transaction.id,
+      height: stateStore.chain.lastBlockHeaders[0].height,
+      expHeight: stateStore.chain.lastBlockHeaders[0].height + tiplskConfig.height.expired,
       content: {
         type: asset.type,
         senderId: asset.senderId,

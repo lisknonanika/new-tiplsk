@@ -7,23 +7,27 @@
             "fieldNumber": 1,
             "items": {
                 "type": "object",
-                "required": ["type", "id", "height"],
+                "required": ["type", "id", "height", "expHeight"],
                 "properties": {
                     "type": {
                         "dataType": "string",
                         "fieldNumber": 1
                     },
                     "id": {
-                        "dataType": "string",
+                        "dataType": "bytes",
                         "fieldNumber": 2
                     },
                     "height": {
-                        "dataType": "string",
+                        "dataType": "uint32",
                         "fieldNumber": 3
+                    },
+                    "expHeight": {
+                        "dataType": "uint32",
+                        "fieldNumber": 4
                     },
                     "content": {
                         "type": "object",
-                        "fieldNumber": 4,
+                        "fieldNumber": 5,
                         "required": ["type", "senderId"],
                         "properties": {
                             "type": {
@@ -43,7 +47,7 @@
                                 "fieldNumber": 4
                             },
                             "address": {
-                                "dataType": "string",
+                                "dataType": "bytes",
                                 "fieldNumber": 5
                             },
                             "amount": {
