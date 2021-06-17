@@ -45,7 +45,21 @@ class Home extends Component {
   render = () => {
     return (
       <div className="center">
-        <button onClick={this.getAddressAndPassphrase}>Generate TipLSK Address</button>
+        <div className="label">- What's TipLSK? -</div>
+        <div className="note">
+          <div>This service running on the blockchain built by Lisk SDK.</div>
+          <div>You can send and receive tokens via SNS etc.</div>
+        </div>
+
+        <div className="label">- Available -</div>
+        <div className="note">
+          <div>Discord: <a href="https://discord.gg/dkejVnjCQZ" target="_" className="link2">mdmg work&nbsp;<fa.FaDiscord/></a></div>
+          <div>*Join and send a DM to TipLSK and say "!help".</div>
+        </div>
+
+        <div className="note">
+          <div><button onClick={this.getAddressAndPassphrase}>Generate TipLSK Address</button></div>
+        </div>
       </div>
     );
   }

@@ -32,6 +32,7 @@ button {
   text-decoration :none;
   outline: none;
   font-size: 1.8rem;
+  width: 300px;
 }
 
 .App-header {
@@ -49,22 +50,16 @@ button {
 
 .App-title {
   font-size: 25px;
+  color: #fff !important;
+  text-decoration: none;
 }
 
 .App-help {
   position: absolute;
   top: 13px;
-  right: 0;
-}
-
-.App-help a {
+  right: 10px;
   font-size: 25px;
   color: #fff !important;
-}
-
-.App-link {
-  color: white;
-  text-decoration: none;
 }
 
 .App-footer {
@@ -100,6 +95,10 @@ button {
 .note {
   padding: 5px;
   margin-bottom: 10px;
+}
+
+hr {
+  border: 1px 0px 0px 0px solid #999;
 }
 
 .link {
