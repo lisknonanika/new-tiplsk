@@ -25,7 +25,7 @@ export class TipAsset extends BaseAsset {
     if (!senderAccount) throw new Error(`Sender account is unregistered.`);
     if (bufferToHex(senderAccount.address) !== bufferToHex(transaction.senderAddress)) throw new Error(`Sender address do not match.`);
 
-    const recipientAccount = await common.getLinkAccount(asset.type, asset.senderId, null, stateStore);
+    const recipientAccount = await common.getLinkAccount(asset.type, asset.recipientId, null, stateStore);
     if (!recipientAccount) throw new Error(`Recipient Account is unregistered.`);
 
     // get chain state - Pending transaction
