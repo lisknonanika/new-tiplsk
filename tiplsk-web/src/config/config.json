@@ -1,0 +1,11 @@
+{
+  "RPC_ENDPOINT": "ws://127.0.0.1:8080/ws",
+  "HOST": "http://127.0.0.1:3001",
+  "SERVICE_URL":  [
+    {"type": "twitter", "name": "Twitter", "url": "https://twitter.com"},
+    {"type": "discord", "name": "Discord", "url": "https://discord.com"}
+  ],
+  "PROF_URL":  [
+    {"type": "twitter", "url": "https://twitter.com/intent/user?user_id="}
+  ]
+}

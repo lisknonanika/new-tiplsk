@@ -22,7 +22,6 @@ class App extends Component {
           <ul>
             <li>Developer: <a href="https://twitter.com/ys_mdmg" target="_" className="link2">@ys_mdmg&nbsp;<fa.FaTwitter /></a></li>
             <li>Source: <a href="https://github.com/lisknonanika/new-tiplsk" target="_" className="link2">lisknonanika/new-tiplsk&nbsp;<fa.FaGithub /></a></li>
-            <li>Explorer: <a href="http://127.0.0.1:4005" target="_" className="link2">Dashboad&nbsp;<fa.FaLink /></a></li>
             <li>Lisk Official: <a href="https://lisk.com" target="_" className="link2">Lisk&nbsp;<fa.FaLink /></a></li>
             <li>Lisk SDK: <a href="https://github.com/LiskHQ/lisk-sdk" target="_" className="link2">LiskHQ/lisk-sdk&nbsp;<fa.FaGithub /></a></li>
           </ul>
