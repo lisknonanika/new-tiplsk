@@ -1,7 +1,7 @@
 import { APIClient, createWSClient } from '@liskhq/lisk-api-client';
 import { bufferToHex } from '@liskhq/lisk-cryptography';
 import { convertLSKToBeddows } from '@liskhq/lisk-transactions';
-import { RPC_ENDPOINT, TIPLSK } from '../const';
+import { RPC_ENDPOINT, TIPLSK } from '../conf';
 import { CommandResult, Tip } from '../type';
 
 const createTx = async (client: APIClient, asset: Tip): Promise<Record<string, unknown>> => {

@@ -1,6 +1,6 @@
 import { APIClient, createWSClient } from '@liskhq/lisk-api-client';
 import { hexToBuffer, getBase32AddressFromAddress } from '@liskhq/lisk-cryptography';
-import { RPC_ENDPOINT } from '../const';
+import { RPC_ENDPOINT } from '../conf';
 import { LinkAccount, CommandResult } from '../type';
 
 export const execute = async(type: string, senderId: string): Promise<CommandResult> => {

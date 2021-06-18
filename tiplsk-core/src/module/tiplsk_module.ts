@@ -1,5 +1,5 @@
 import { BaseModule, codec, AfterGenesisBlockApplyContext, AfterBlockApplyContext } from 'lisk-sdk';
-import { PreRegistrationAsset, RegistrationAsset, PreTipAsset } from './asset';
+import { PreRegistrationAsset, RegistrationAsset, PreTipAsset, TipAsset } from './asset';
 import {
   accountSchema, csLinkAccountSchema, csPendingTxSchema,
   CsLinkAccount, CsPendingTx,
@@ -10,7 +10,7 @@ export class TipLskModule extends BaseModule {
   public name = 'tiplsk'; 
   public id = 3000; 
   public accountSchema = accountSchema;
-  public transactionAssets = [ new PreRegistrationAsset(), new RegistrationAsset(), new PreTipAsset() ];
+  public transactionAssets = [ new PreRegistrationAsset(), new RegistrationAsset(), new PreTipAsset(), new TipAsset() ];
 
   public actions = {
     linkAccount: async () => {

@@ -1,6 +1,6 @@
 import { APIClient, createWSClient } from '@liskhq/lisk-api-client';
 import { bufferToHex, getAddressFromBase32Address } from '@liskhq/lisk-cryptography';
-import { RPC_ENDPOINT, TIPLSK } from '../const';
+import { RPC_ENDPOINT, TIPLSK } from '../conf';
 import { CommandResult, Registration } from '../type';
 
 const createTx = async (client: APIClient, asset: Registration): Promise<Record<string, unknown>> => {

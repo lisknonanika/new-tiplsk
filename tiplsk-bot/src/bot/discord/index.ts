@@ -1,6 +1,6 @@
 import * as discord from 'discord.js';
 import * as conf from './conf';
-import { WEB_URL } from '../../const';
+import { WEB_URL } from '../../conf';
 import { help, balance, registration, tip } from '../../command';
 
 const client = new discord.Client();

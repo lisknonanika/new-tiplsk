@@ -1,13 +1,17 @@
-export const TYPE: string = "discord";
-export const TOKEN: string = "";
-export const DM_ONLY: boolean = false;
-export const COMMANDS = {
+import * as discordBotConfig from './discord-bot-config.json';
+
+const TYPE = discordBotConfig.TYPE;
+const TOKEN = discordBotConfig.TOKEN;
+const DM_ONLY = discordBotConfig.DM_ONLY;
+
+const COMMANDS = {
   help: /(\s|^)!help(\s|$)/,
   balance: /(\s|^)!balance(\s|$)/,
   reg: /(\s|^)!reg(\s+)tip[a-z0-9]{38}(\s|$)/,
   tip: /(\s|^)!tip(\s+)([0]{1}|([1-9]{1}[0-9]{0,4}))(\.[0-9]{0,8})?(\s+)(<@![a-z0-9]+>)(\s|$)/,
 };
-export const MESSAGE = {
+
+const MESSAGE = {
   ERROR: "**[Error]**",
   HELP: "**[Command List]**\r\n" +
         "**!help** - Display command list and registered tiplsk address.\r\n" +
@@ -28,4 +32,5 @@ export const MESSAGE = {
   TIP: "**[Tip]**\r\n"+
        "To complete the process, please access the following URL and enter your passphrase."
 }
-  
+
+export { TYPE, TOKEN, DM_ONLY, COMMANDS, MESSAGE };
