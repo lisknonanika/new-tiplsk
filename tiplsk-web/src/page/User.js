@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { createWSClient } from '@liskhq/lisk-api-client';
-import { getBase32AddressFromAddress, bufferToHex } from '@liskhq/lisk-cryptography';
+import { getBase32AddressFromAddress, hexToBuffer } from '@liskhq/lisk-cryptography';
 import { convertBeddowsToLSK } from '@liskhq/lisk-transactions';
 import * as fa from 'react-icons/fa';
 import { RPC_ENDPOINT, HOST, SERVICE_URL } from '../config';
@@ -39,7 +39,7 @@ class User extends Component {
       }
 
       // find account
-      const bufferAddress = Buffer.from(linkAccount.address);
+      const bufferAddress = hexToBuffer(linkAccount.address);
       const data = await client.account.get(bufferAddress);
       if (!data) {
         account.status = 1;
@@ -89,10 +89,10 @@ class User extends Component {
       // set pending info
       for (const pend of pendingTx) {
         const pendingContent = {
-          txId: bufferToHex(pend.id),
+          txId: pend.id,
           type: pend.type,
           recipientNm: pend.content.recipientNm,
-          address: pend.content.address? getBase32AddressFromAddress(Buffer.from(pend.content.address), "tip"): "",
+          address: pend.content.address? getBase32AddressFromAddress(hexToBuffer(pend.content.address), "tip"): "",
           amount: pend.content.amount?convertBeddowsToLSK(pend.content.amount): ""
         }
         pending.content.push(pendingContent);

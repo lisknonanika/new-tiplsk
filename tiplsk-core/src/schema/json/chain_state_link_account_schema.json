@@ -18,7 +18,7 @@
                         "fieldNumber": 2
                     },
                     "address": {
-                        "dataType": "bytes",
+                        "dataType": "string",
                         "fieldNumber": 3
                     }
                 }

@@ -21,17 +21,17 @@ export class RegistrationAsset extends BaseAsset {
   public async apply({ asset, stateStore }: ApplyAssetContext<TxRegistration>): Promise<void> {
     // get chain state - Link account
     const linkAccount = await common.getLinkAccount(asset.type, asset.senderId, null, stateStore);
-    if (linkAccount && bufferToHex(asset.address) === bufferToHex(linkAccount.address))  throw new Error(`Same account is already registerd.`);
+    if (linkAccount && bufferToHex(asset.address) === linkAccount.address)  throw new Error(`Same account is already registerd.`);
 
     // get chain state - Pending transaction
     const pendingTx = await common.getPendingTxByTxId("registration", asset.txId? asset.txId: null, stateStore);
     if (!pendingTx) throw new Error(`Pending Transaction is not found.`);
     if (!pendingTx.content.address)  throw new Error(`Pending Transaction is not correct.`);
-    if (bufferToHex(pendingTx.content.address) !== bufferToHex(asset.address)) throw new Error(`Sender address do not match.`);
+    if (pendingTx.content.address !== bufferToHex(asset.address)) throw new Error(`Sender address do not match.`);
     
     // update old account
     if (linkAccount) {
-      const target = await stateStore.account.get<TipLskAccount>(linkAccount.address);
+      const target = await stateStore.account.get<TipLskAccount>(asset.address);
       if (target) {
         const newLink = target.tiplsk.link.filter(v => v.type !== asset.type || v.id !== asset.senderId);
         target.tiplsk.link = newLink;

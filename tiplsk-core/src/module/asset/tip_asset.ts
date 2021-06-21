@@ -23,7 +23,7 @@ export class TipAsset extends BaseAsset {
     // get chain state
     const senderAccount = await common.getLinkAccount(asset.type, asset.senderId, null, stateStore);
     if (!senderAccount) throw new Error(`Sender account is unregistered.`);
-    if (bufferToHex(senderAccount.address) !== bufferToHex(transaction.senderAddress)) throw new Error(`Sender address do not match.`);
+    if (senderAccount.address !== bufferToHex(transaction.senderAddress)) throw new Error(`Sender address do not match.`);
 
     const recipientAccount = await common.getLinkAccount(asset.type, asset.recipientId, null, stateStore);
     if (!recipientAccount) throw new Error(`Recipient Account is unregistered.`);

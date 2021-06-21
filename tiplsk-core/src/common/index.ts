@@ -12,7 +12,7 @@ export const getLinkAccount = async(type: string, id: string, address: Buffer|nu
     const buf = await stateStore.chain.get(CS_LINK_ACCOUNT);
     if (!buf) return undefined;
     const cs = codec.decode<CsLinkAccount>(csLinkAccountSchema, buf);
-    if (address) return cs.link.find(v => v.type === type && v.id === id && bufferToHex(v.address) === bufferToHex(address));
+    if (address) return cs.link.find(v => v.type === type && v.id === id && v.address === bufferToHex(address));
     return cs.link.find(v => v.type === type && v.id === id);
 
   } catch (err) {
@@ -27,7 +27,7 @@ export const updateLinkAccount = async(type: string, id: string, address: Buffer
     const cs = codec.decode<CsLinkAccount>(csLinkAccountSchema, buf);
     data = cs.link.filter(v => v.type !== type || v.id !== id);
   }
-  data.push({type: type, id: id, address: address});
+  data.push({type: type, id: id, address: bufferToHex(address)});
   await stateStore.chain.set(CS_LINK_ACCOUNT, codec.encode(csLinkAccountSchema, {link: data}));
 }
 
@@ -36,7 +36,7 @@ export const getPendingTxBySenderIdAndAddress = async(type: string, contentType:
   if (!buf) return undefined;
   const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
   const data = cs.tx.find(v => {
-    const contentAddress = v.content.address? bufferToHex(v.content.address): "";
+    const contentAddress = v.content.address? v.content.address: "";
     return v.type === type && v.content.type === contentType && v.content.senderId === senderId && contentAddress === bufferToHex(address)
   });
   return data;
@@ -48,7 +48,7 @@ export const getPendingTxByTxId = async(type: string, txId: Buffer|null, stateSt
   if (!buf) return undefined;
   const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
   const data = cs.tx.find(v => {
-    return v.type === type && bufferToHex(v.id) === bufferToHex(txId)
+    return v.type === type && v.id === bufferToHex(txId)
   });
   return data;
 }
@@ -67,7 +67,7 @@ export const removePendingTx = async(type: string, txId: Buffer|null, stateStore
   let data: CsPendingTxElem[] = [];
   if (buf) {
     const cs = codec.decode<CsPendingTx>(csPendingTxSchema, buf);
-    data = cs.tx.filter(v => v.type !== type || bufferToHex(v.id) !== bufferToHex(txId));
+    data = cs.tx.filter(v => v.type !== type || v.id !== bufferToHex(txId));
   }
   await stateStore.chain.set(CS_PENDING_TX, codec.encode(csPendingTxSchema, {tx: data}));
 }

@@ -31,10 +31,10 @@ export class PreRegistrationAsset extends BaseAsset {
     // update chain state - pending transaction
     const param: CsPendingTxElem = {
       type: "registration",
-      id: transaction.id,
+      id: bufferToHex(transaction.id),
       height: stateStore.chain.lastBlockHeaders[0].height,
       expHeight: stateStore.chain.lastBlockHeaders[0].height + tiplskConfig.height.expired,
-      content: {type: asset.type, senderId: asset.senderId, address: asset.address}
+      content: {type: asset.type, senderId: asset.senderId, address: bufferToHex(asset.address)}
     }
     await common.addPendingTxs(param, stateStore);
 

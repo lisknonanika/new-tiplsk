@@ -14,7 +14,7 @@
                         "fieldNumber": 1
                     },
                     "id": {
-                        "dataType": "bytes",
+                        "dataType": "string",
                         "fieldNumber": 2
                     },
                     "height": {
@@ -47,7 +47,7 @@
                                 "fieldNumber": 4
                             },
                             "address": {
-                                "dataType": "bytes",
+                                "dataType": "string",
                                 "fieldNumber": 5
                             },
                             "amount": {

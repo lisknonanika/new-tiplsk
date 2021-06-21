@@ -22,13 +22,16 @@ export class PreTipAsset extends BaseAsset {
 
   public async apply({ asset, stateStore, transaction }: ApplyAssetContext<TxTip>): Promise<void> {
     // get chain state
-    const linkAccount = await common.getLinkAccount(asset.type, asset.senderId, null, stateStore);
-    if (!linkAccount) throw new Error(`Account is unregistered.`);
+    const senderAccount = await common.getLinkAccount(asset.type, asset.senderId, null, stateStore);
+    if (!senderAccount) throw new Error(`Sender Account is unregistered.`);
+
+    const recipientAccount = await common.getLinkAccount(asset.type, asset.recipientId, null, stateStore);
+    if (!recipientAccount) throw new Error(`Recipient Account is unregistered.`);
 
     // update chain state - pending transaction
     const param: CsPendingTxElem = {
       type: "tip",
-      id: transaction.id,
+      id: bufferToHex(transaction.id),
       height: stateStore.chain.lastBlockHeaders[0].height,
       expHeight: stateStore.chain.lastBlockHeaders[0].height + tiplskConfig.height.expired,
       content: {
