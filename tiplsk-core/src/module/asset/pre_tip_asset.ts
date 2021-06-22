@@ -12,11 +12,11 @@ export class PreTipAsset extends BaseAsset {
   schema = txTipSchema;
 
   public validate({ asset, transaction }: ValidateAssetContext<TxTip>): void {
-    if (!asset.type) throw new Error(`Invalid parameter: "content.type"`);
-    if (!asset.senderId) throw new Error(`Invalid parameter: "content.senderId"`);
-    if (!asset.recipientId) throw new Error(`Invalid parameter: "content.recipientId"`);
-    if (!asset.recipientNm) throw new Error(`Invalid parameter: "content.recipientNm"`);
-    if (!asset.amount) throw new Error(`Invalid parameter: "content.amount"`);
+    if (!asset.type) throw new Error(`Invalid parameter: "type"`);
+    if (!asset.senderId) throw new Error(`Invalid parameter: "senderId"`);
+    if (!asset.recipientId) throw new Error(`Invalid parameter: "recipientId"`);
+    if (!asset.recipientNm) throw new Error(`Invalid parameter: "recipientNm"`);
+    if (!asset.amount) throw new Error(`Invalid parameter: "amount"`);
     if (bufferToHex(transaction.senderAddress) !== tiplskConfig.address) throw new Error(`Sender is not TipLSK."`);
   }
 

@@ -13,24 +13,21 @@ const COMMANDS = {
 
 const MESSAGE = {
   ERROR: "**[Error]**",
-  HELP: "**[Command List]**\r\n" +
-        "**!help** - Display command list and registered tiplsk address.\r\n" +
-        "> e.g. !help\r\n" +
-        "\r\n" +
-        "**!balance** - Display your balance.\r\n" +
-        "> e.g. !balance\r\n" +
-        "\r\n" +
-        "**!reg** [`tiplsk address`] - Register your tiplsk address.\r\n" +
-        "> e.g. !reg `tipgame2jsvqktwwx2txppudvxt2v8dtdfvxdbrhg`\r\n" +
-        "\r\n" +
-        "**!tip** [`tip amount`] [`recipient`] - Send tip to user.\r\n" +
-        "> * [amount]: min=0.00000001 max=99999.99999999\r\n" +
+  HELP: "**[Command List]**\n" +
+        "**!help** - Display command list and registered tiplsk address.\n" +
+        "> e.g. !help\n\n" +
+        "**!balance** - Display your balance.\n" +
+        "> e.g. !balance\n\n" +
+        "**!reg** [`tiplsk address`] - Register your tiplsk address.\n" +
+        "> e.g. !reg `tipgame2jsvqktwwx2txppudvxt2v8dtdfvxdbrhg`\n\n" +
+        "**!tip** [`tip amount`] [`recipient`] - Send tip to user.\n" +
+        "> * [amount]: min=0.00000001 max=99999.99999999\n" +
         "> e.g. !tip `1.2345` `@mdmg`",
   BALANCE: "**[Your Balance]**",
-  REGISTRATION: "**[Registration]**\r\n"+
-                "To complete the process, please access the following URL and enter your passphrase.",
-  TIP: "**[Tip]**\r\n"+
-       "To complete the process, please access the following URL and enter your passphrase."
+  REGISTRATION: "**[Registration]**\nTo complete the process, please access the following URL and enter your passphrase.",
+  TIP: "**[Tip]**\nTo complete the process, please access the following URL and enter your passphrase.",
+  EXPIRED_ANOUNCE: "*Please access the above URL and complete the process within `30 minutes.`",
+  RECIPIENT_NOT_REGISTER_ANOUNCE: "*If you get the message `\"Recipient Account is unregistered.\"`, please encourage the recipient to register :wink:"
 }
 
 export { TYPE, TOKEN, DM_ONLY, COMMANDS, MESSAGE };

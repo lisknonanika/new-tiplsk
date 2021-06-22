@@ -1,5 +1,5 @@
 import { BaseAsset, ValidateAssetContext, ApplyAssetContext } from 'lisk-sdk';
-import { bufferToHex } from '@liskhq/lisk-cryptography';
+import { bufferToHex, hexToBuffer } from '@liskhq/lisk-cryptography';
 import { txTipSchema, TxTip } from '../../schema';
 import * as common from '../../common';
 
@@ -12,11 +12,11 @@ export class TipAsset extends BaseAsset {
 
   public validate({ asset }: ValidateAssetContext<TxTip>): void {
     if (!asset.txId) throw new Error(`Invalid parameter: "txId"`);
-    if (!asset.type) throw new Error(`Invalid parameter: "content.type"`);
-    if (!asset.senderId) throw new Error(`Invalid parameter: "content.senderId"`);
-    if (!asset.recipientId) throw new Error(`Invalid parameter: "content.recipientId"`);
-    if (!asset.recipientNm) throw new Error(`Invalid parameter: "content.recipientNm"`);
-    if (!asset.amount) throw new Error(`Invalid parameter: "content.amount"`);
+    if (!asset.type) throw new Error(`Invalid parameter: "type"`);
+    if (!asset.senderId) throw new Error(`Invalid parameter: "senderId"`);
+    if (!asset.recipientId) throw new Error(`Invalid parameter: "recipientId"`);
+    if (!asset.recipientNm) throw new Error(`Invalid parameter: "recipientNm"`);
+    if (!asset.amount) throw new Error(`Invalid parameter: "amount"`);
   }
 
   public async apply({ asset, stateStore, reducerHandler, transaction }: ApplyAssetContext<TxTip>): Promise<void> {
@@ -36,7 +36,7 @@ export class TipAsset extends BaseAsset {
     await common.removePendingTx("tip", asset.txId? asset.txId: null, stateStore);
 
     // update balance
-    await reducerHandler.invoke("token:credit", {address: recipientAccount.address, amount: asset.amount});
-    await reducerHandler.invoke("token:debit", {address: senderAccount.address, amount: asset.amount});
+    await reducerHandler.invoke("token:credit", {address: hexToBuffer(recipientAccount.address), amount: asset.amount});
+    await reducerHandler.invoke("token:debit", {address: hexToBuffer(senderAccount.address), amount: asset.amount});
   }
 }

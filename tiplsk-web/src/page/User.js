@@ -140,7 +140,7 @@ class User extends Component {
         <div className="note">
           <button onClick={this.getUserInfo}>Reload&nbsp;<fa.FaRedoAlt/></button>
         </div>
-        {this.state.account.status === 1?
+        {this.state.account.status !== 0?
           <div>
             <hr></hr>
             <div className="label">- Pending -</div>
@@ -155,7 +155,7 @@ class User extends Component {
                     <div className="card">
                       <div className="card-column">
                         <div className="card-columnLabel">TransactionID&nbsp;<fa.FaLink/></div>
-                        <div><a href={HOST + "/transactions/" + info.txId} target="_" className="link2">{info.txId}</a></div>
+                        <div><a href={HOST + "/transactions/" + info.txId} className="link2">{info.txId}</a></div>
                       </div>
                       <div className="card-column"><div className="card-columnLabel">Type</div><div>{info.type}</div></div>
                       {info.recipientNm? <div className="card-column"><div className="card-columnLabel">Recipient Name</div><div>{info.recipientNm}</div></div>: ""}

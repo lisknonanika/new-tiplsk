@@ -22,13 +22,13 @@ class Home extends Component {
       title: "Generated your account",
       icon: "success",
       html: (
-        <div style={{paddingTop: "10px"}}>
-        <div className="copy-text">
-          <div className="copy-icon"><fa.FaCopy/></div>
-          <textarea value={`<address>\r\n${address}\r\n\r\n<passphrase>\r\n${passphrase}`} readOnly onClick={this.copyText} rows="8"/>
+        <div>
+          <div className="copy-text">
+            <div className="copy-icon"><fa.FaCopy/></div>
+            <textarea value={`<address>\r\n${address}\r\n\r\n<passphrase>\r\n${passphrase}`} readOnly onClick={this.copyText} rows="8"/>
+          </div>
+          <div className="alert note">* Don't forget your passphrase.</div>
         </div>
-        <div className="alert note">* Don't forget your passphrase.</div>
-      </div>
       ),
       confirmButtonColor: "#3085d6",
       allowOutsideClick: false

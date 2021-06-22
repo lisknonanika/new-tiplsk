@@ -12,10 +12,10 @@ export class RegistrationAsset extends BaseAsset {
 
   public validate({ asset, transaction }: ValidateAssetContext<TxRegistration>): void {
     if (!asset.txId) throw new Error(`Invalid parameter: "txId"`);
-    if (!asset.type) throw new Error(`Invalid parameter: "content.type"`);
-    if (!asset.senderId) throw new Error(`Invalid parameter: "content.senderId"`);
-    if (!asset.address) throw new Error(`Invalid parameter: "content.address"`);
-    if (asset.address !== transaction.senderAddress) throw new Error(`Sender address do not match.`);
+    if (!asset.type) throw new Error(`Invalid parameter: "type"`);
+    if (!asset.senderId) throw new Error(`Invalid parameter: "senderId"`);
+    if (!asset.address) throw new Error(`Invalid parameter: "address"`);
+    if (bufferToHex(asset.address) !== bufferToHex(transaction.senderAddress)) throw new Error(`Sender address do not match.`);
   }
 
   public async apply({ asset, stateStore }: ApplyAssetContext<TxRegistration>): Promise<void> {

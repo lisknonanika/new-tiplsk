@@ -13,9 +13,9 @@ export class PreRegistrationAsset extends BaseAsset {
   schema = txRegistrationSchema;
 
   public validate({ asset, transaction }: ValidateAssetContext<TxRegistration>): void {
-    if (!asset.type) throw new Error(`Invalid parameter: "content.type"`);
-    if (!asset.senderId) throw new Error(`Invalid parameter: "content.senderId"`);
-    if (!asset.address) throw new Error(`Invalid parameter: "content.address"`);
+    if (!asset.type) throw new Error(`Invalid parameter: "type"`);
+    if (!asset.senderId) throw new Error(`Invalid parameter: "senderId"`);
+    if (!asset.address) throw new Error(`Invalid parameter: "address"`);
     if (bufferToHex(transaction.senderAddress) !== tiplskConfig.address) throw new Error(`Sender is not TipLSK."`);
   }
 

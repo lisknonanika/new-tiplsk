@@ -11,13 +11,13 @@ const runHelpCommand = async(author:discord.User) => {
   
   // send message
   if (ret.result) await author.send(
-    `${conf.MESSAGE.HELP}\r\n\r\n` +
-    `**[Your Address]**\r\n${ret.data}\r\n\r\n` +
-    `**[TipLSK WEB]**\r\n` +
-    `- Generate Address -\r\n${WEB_URL}\r\n\r\n` +
-    `- Your Page -\r\n${WEB_URL}/accounts/discord-${author.id}`
+    `${conf.MESSAGE.HELP}\n\n` +
+    `**[Your Address]**\n${ret.data}\n\n` +
+    `**[TipLSK WEB]**\n` +
+    `- Generate Address -\n${WEB_URL}\n\n` +
+    `- Your Page -\n${WEB_URL}/accounts/discord-${author.id}`
     );
-  else await author.send(`${conf.MESSAGE.ERROR}\r\n${ret.data}`);
+  else await author.send(`${conf.MESSAGE.ERROR}\n${ret.data}`);
 }
 
 const runBalanceCommand = async(author:discord.User) => {
@@ -25,8 +25,8 @@ const runBalanceCommand = async(author:discord.User) => {
   const ret = await balance.execute(conf.TYPE, author.id);
   
   // send message
-  if (ret.result) await author.send(`${conf.MESSAGE.BALANCE}\r\n${ret.data}`);
-  else await author.send(`${conf.MESSAGE.ERROR}\r\n${ret.data}`);
+  if (ret.result) await author.send(`${conf.MESSAGE.BALANCE}\n${ret.data}`);
+  else await author.send(`${conf.MESSAGE.ERROR}\n${ret.data}`);
 }
 
 const runRegistrationCommand = async(author:discord.User, content:string) => {
@@ -38,8 +38,8 @@ const runRegistrationCommand = async(author:discord.User, content:string) => {
   const ret = await registration.execute(conf.TYPE, author.id, address);
 
   // send message
-  if (ret.result) await author.send(`${conf.MESSAGE.REGISTRATION}\r\n${WEB_URL}/transactions/${ret.data}`);
-  else await author.send(`${conf.MESSAGE.ERROR}\r\n${ret.data}`);
+  if (ret.result) await author.send(`${conf.MESSAGE.REGISTRATION}\n${WEB_URL}/transactions/${ret.data}\n${conf.MESSAGE.EXPIRED_ANOUNCE}`);
+  else await author.send(`${conf.MESSAGE.ERROR}\n${ret.data}`);
 }
 
 const runTipCommand = async(author:discord.User, users:discord.Collection<string, discord.User>, content:string) => {
@@ -55,8 +55,8 @@ const runTipCommand = async(author:discord.User, users:discord.Collection<string
     const ret = await tip.execute(conf.TYPE, author.id, user[1].id, user[1].username, amount);
 
     // send message
-    if (ret.result) await author.send(`${conf.MESSAGE.TIP}\r\n${WEB_URL}/transactions/${ret.data}`);
-    else await author.send(`${conf.MESSAGE.ERROR}\r\n${ret.data}`);
+    if (ret.result) await author.send(`${conf.MESSAGE.TIP}\n${WEB_URL}/transactions/${ret.data}\n${conf.MESSAGE.EXPIRED_ANOUNCE}`);
+    else await author.send(`${conf.MESSAGE.ERROR}\n${ret.data}\n${conf.MESSAGE.RECIPIENT_NOT_REGISTER_ANOUNCE}`);
     break;
   }
 }
