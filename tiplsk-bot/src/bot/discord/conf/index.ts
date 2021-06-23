@@ -21,6 +21,7 @@ const MESSAGE = {
         "> e.g. !reg `tipgame2jsvqktwwx2txppudvxt2v8dtdfvxdbrhg`\n\n" +
         "**!tip** [`tip amount`] [`@recipientName`] @TipLSK - Send tip to user.\n" +
         "> * [amount]: min=0.00000001 max=99999.99999999\n" +
+        "> * This command is not available in DM.\n" +
         "> e.g. !tip `1.2345` `@mdmg`",
   BALANCE: "**[Your Balance]**",
   REGISTRATION: "**[Registration]**\nTo complete the process, please access the following URL and enter your passphrase.",
