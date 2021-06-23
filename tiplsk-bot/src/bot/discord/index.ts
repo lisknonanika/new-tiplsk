@@ -42,7 +42,7 @@ const runRegistrationCommand = async(author:discord.User, content:string) => {
   else await author.send(`${conf.MESSAGE.ERROR}\n${ret.data}`);
 }
 
-const runTipCommand = async(author:discord.User, users:discord.Collection<string, discord.User>, content:string) => {
+const runTipCommand = async(author:discord.User, users:discord.Collection<string, discord.User>, content:string, message:discord.Message) => {
   const matches = content.match(conf.COMMANDS.tip);
   const command = matches? matches[0].trim(): "";
   const arr = command.split(" ");
@@ -56,7 +56,7 @@ const runTipCommand = async(author:discord.User, users:discord.Collection<string
 
     // send message
     if (ret.result) await author.send(`${conf.MESSAGE.TIP}\n${WEB_URL}/transactions/${ret.data}\n${conf.MESSAGE.EXPIRED_ANOUNCE}`);
-    else await author.send(`${conf.MESSAGE.ERROR}\n${ret.data}\n${conf.MESSAGE.RECIPIENT_NOT_REGISTER_ANOUNCE}`);
+    else await message.reply(`\n${conf.MESSAGE.ERROR}\n${ret.data}\n${conf.MESSAGE.RECIPIENT_NOT_REGISTER_ANOUNCE}`);
     break;
   }
 }
@@ -95,7 +95,7 @@ client.on("message", async message => {
   
   // tip command
   if (conf.COMMANDS.tip.test(content)) {
-    await runTipCommand(author, message.mentions.users, content);
+    await runTipCommand(author, message.mentions.users, content, message);
     return;
   }
 });
