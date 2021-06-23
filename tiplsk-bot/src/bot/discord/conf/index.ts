@@ -2,7 +2,6 @@ import * as discordBotConfig from './discord-bot-config.json';
 
 const TYPE = discordBotConfig.TYPE;
 const TOKEN = discordBotConfig.TOKEN;
-const DM_ONLY = discordBotConfig.DM_ONLY;
 
 const COMMANDS = {
   help: /(\s|^)!help(\s|$)/,
@@ -20,7 +19,7 @@ const MESSAGE = {
         "> e.g. !balance\n\n" +
         "**!reg** [`tiplsk address`] - Register your tiplsk address.\n" +
         "> e.g. !reg `tipgame2jsvqktwwx2txppudvxt2v8dtdfvxdbrhg`\n\n" +
-        "**!tip** [`tip amount`] [`recipient`] - Send tip to user.\n" +
+        "**!tip** [`tip amount`] [`@recipientName`] @TipLSK - Send tip to user.\n" +
         "> * [amount]: min=0.00000001 max=99999.99999999\n" +
         "> e.g. !tip `1.2345` `@mdmg`",
   BALANCE: "**[Your Balance]**",
@@ -30,4 +29,4 @@ const MESSAGE = {
   RECIPIENT_NOT_REGISTER_ANOUNCE: "*If you get the message `\"Recipient Account is unregistered.\"`, please encourage the recipient to register :wink:"
 }
 
-export { TYPE, TOKEN, DM_ONLY, COMMANDS, MESSAGE };
+export { TYPE, TOKEN, COMMANDS, MESSAGE };

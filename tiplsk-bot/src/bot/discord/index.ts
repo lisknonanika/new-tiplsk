@@ -68,7 +68,7 @@ client.on("ready", ()=> {
 client.on("message", async message => {
   const botId = client.user?.id? client.user?.id: "";
   if(message.author.id === botId || message.author.bot) return;
-  if (message.channel.type !== "dm" && (conf.DM_ONLY || !message.mentions.has(botId))) return;
+  if (message.channel.type !== "dm" && !message.mentions.has(botId)) return;
 
   const content = message.content.trim().replace(/\s+/g," ");
   if (!content) return;
