@@ -14,9 +14,9 @@ export const execute = async(type: string, senderId: string): Promise<CommandRes
     const account = linkResult.link.find(v => v.type === type && v.id === senderId);
     if (!account) return {result: true, data: "Unregistered"};
     
-    const ret = await client.account.get(hexToBuffer(account.address)) as any;
-    if (!ret || !ret.data) return { result: true, data: "Address not found."};
-    return {result: true, data: convertLSKToBeddows(ret.data.token.balance.toString())};
+    const data = await client.account.get(hexToBuffer(account.address)) as any;
+    if (!data) return { result: true, data: "Address not found."};
+    return {result: true, data: convertLSKToBeddows(data.token.balance.toString())};
 
   } catch (err) {
     console.log(err);
