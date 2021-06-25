@@ -1,6 +1,6 @@
 import { APIClient, createWSClient } from '@liskhq/lisk-api-client';
 import { hexToBuffer } from '@liskhq/lisk-cryptography';
-import { convertLSKToBeddows } from '@liskhq/lisk-transactions';
+import { convertBeddowsToLSK } from '@liskhq/lisk-transactions';
 import { RPC_ENDPOINT } from '../conf';
 import { LinkAccount, CommandResult } from '../type';
 
@@ -16,7 +16,7 @@ export const execute = async(type: string, senderId: string): Promise<CommandRes
     
     const data = await client.account.get(hexToBuffer(account.address)) as any;
     if (!data) return { result: true, data: "Address not found."};
-    return {result: true, data: convertLSKToBeddows(data.token.balance.toString())};
+    return {result: true, data: convertBeddowsToLSK(data.token.balance.toString())};
 
   } catch (err) {
     console.log(err);
