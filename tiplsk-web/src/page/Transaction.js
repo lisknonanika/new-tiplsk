@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { createWSClient } from '@liskhq/lisk-api-client';
 import { getBase32AddressFromAddress, getAddressFromBase32Address, hexToBuffer, bufferToHex } from '@liskhq/lisk-cryptography';
 import { convertBeddowsToLSK, convertLSKToBeddows } from '@liskhq/lisk-transactions';
