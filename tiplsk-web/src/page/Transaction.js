@@ -194,7 +194,7 @@ class Transaction extends Component {
         balance: balance? balance: "",
         recipientId: pendingTx.content.recipientId,
         recipientNm: pendingTx.content.recipientNm,
-        recipientAddress: recipientAccount?.address? recipientAccount.address: "",
+        recipientAddress: recipientAccount?.address? getBase32AddressFromAddress(hexToBuffer(recipientAccount.address), "tip"): "",
         amount: pendingTx.content.amount? convertBeddowsToLSK(pendingTx.content.amount): "",
         service: SERVICE_URL.find(v => v.type === pendingTx.content.type)
       }
