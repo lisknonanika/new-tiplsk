@@ -189,7 +189,7 @@ class Transaction extends Component {
         type: pendingTx.type,
         contentType: pendingTx.content.type,
         senderId: pendingTx.content.senderId,
-        registeredAddress: senderAccount?.address? senderAccount.address: "",
+        registeredAddress: senderAccount?.address? getBase32AddressFromAddress(hexToBuffer(senderAccount.address), "tip"): "",
         senderAddress: pendingTx.content.address? getBase32AddressFromAddress(hexToBuffer(pendingTx.content.address), "tip"): "",
         balance: balance? balance: "",
         recipientId: pendingTx.content.recipientId,
@@ -238,7 +238,7 @@ class Transaction extends Component {
                 :""}
                 {this.state.pending.content.type === "tip"?
                   <div>
-                    <div className="card-column"><div className="card-columnLabel">Sender Address</div><div>{this.state.pending.content.senderAddress}</div></div>
+                    <div className="card-column"><div className="card-columnLabel">Sender Address</div><div>{this.state.pending.content.registeredAddress}</div></div>
                     <div className="card-column"><div className="card-columnLabel">Balance</div><div>{this.state.pending.content.balance} TLSK</div></div>
                     <div className="card-column">
                       <div className="card-columnLabel">Recipient ID&nbsp;<fa.FaLink/></div>
