@@ -54,7 +54,7 @@ class Home extends Component {
         <div className="label">- Available -</div>
         <div className="note">
           <div>Discord: <a href="https://discord.gg/dkejVnjCQZ" target="_" className="link2">mdmg work&nbsp;<fa.FaDiscord/></a></div>
-          <div>*Join and send a DM to TipLSK and say "!help".</div>
+          <div>*Join and send a DM to TipLSK and say "-h".</div>
         </div>
 
         <div className="note">
