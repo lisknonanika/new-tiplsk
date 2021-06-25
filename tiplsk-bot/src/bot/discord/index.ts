@@ -49,7 +49,7 @@ const runTipCommand = async(author:discord.User, users:discord.Collection<string
   const amount = arr[1];
   const recipient = arr[2];
   for (const user of users) {
-    if (recipient !== `<@!${user[1].id}>` || recipient !== `<@${user[1].id}>`) continue;
+    if (recipient !== `<@!${user[1].id}>` && recipient !== `<@${user[1].id}>`) continue;
   
     // command execute
     const ret = await tip.execute(conf.TYPE, author.id, user[1].id, user[1].username, amount);
