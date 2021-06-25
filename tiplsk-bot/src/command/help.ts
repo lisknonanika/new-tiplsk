@@ -12,7 +12,7 @@ export const execute = async(type: string, senderId: string): Promise<CommandRes
     if (!ret || !ret.link) return {result: true, data: "Unregistered"};
     const account = ret.link.find(v => v.type === type && v.id === senderId);
     if (!account) return {result: true, data: "Unregistered"};
-    return {result: true, data: getBase32AddressFromAddress(hexToBuffer(account.id), "tip")};
+    return {result: true, data: getBase32AddressFromAddress(hexToBuffer(account.address), "tip")};
 
   } catch (err) {
     console.log(err);
