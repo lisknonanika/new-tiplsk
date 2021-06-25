@@ -122,7 +122,7 @@ class Transaction extends Component {
             confirmButtonColor: "#3085d6",
             allowOutsideClick: false
           }).then(() => {
-            window.location.href=`${HOST}/accounts/${this.state.pending.content.service.type}-${this.state.pending.content.recipientId}`;
+            window.location.href=`${HOST}/accounts/${this.state.pending.content.service.type}-${this.state.pending.content.senderId}`;
           });
         }, 10000);
 
