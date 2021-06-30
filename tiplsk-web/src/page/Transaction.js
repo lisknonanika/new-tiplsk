@@ -238,8 +238,6 @@ class Transaction extends Component {
                 :""}
                 {this.state.pending.content.type === "tip"?
                   <div>
-                    <div className="card-column"><div className="card-columnLabel">Sender Address</div><div>{this.state.pending.content.registeredAddress}</div></div>
-                    <div className="card-column"><div className="card-columnLabel">Balance</div><div>{this.state.pending.content.balance} TLSK</div></div>
                     <div className="card-column">
                       <div className="card-columnLabel">Recipient ID&nbsp;<fa.FaLink/></div>
                       <div><a href={HOST + "/accounts/" + this.state.pending.content.service.type + "-" + this.state.pending.content.recipientId} className="link2">{this.state.pending.content.recipientId}</a></div>
@@ -247,6 +245,8 @@ class Transaction extends Component {
                     <div className="card-column"><div className="card-columnLabel">Recipient Name</div><div>{this.state.pending.content.recipientNm}</div></div>
                     <div className="card-column"><div className="card-columnLabel">Recipient Address</div><div>{this.state.pending.content.recipientAddress}</div></div>
                     <div className="card-column"><div className="card-columnLabel">Amount</div><div>{this.state.pending.content.amount}</div></div>
+                    <div className="card-column"><div className="card-columnLabel">Sender Address</div><div>{this.state.pending.content.registeredAddress}</div></div>
+                    <div className="card-column"><div className="card-columnLabel">Balance</div><div>{this.state.pending.content.balance} TLSK</div></div>
                   </div>
                 :""}
               </div>

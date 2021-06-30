@@ -148,9 +148,8 @@ class User extends Component {
             {this.state.pending.status === 1? <div className="note">Not Found.</div>: ""}
             {this.state.pending.status === 2?
               <div>
-              {(()=>{
-                for (const info of this.state.pending.content) {
-                  return (
+              {this.state.pending.content.map((info) => {
+                return (
                   <div className="note">
                     <div className="card">
                       <div className="card-column">
@@ -163,9 +162,8 @@ class User extends Component {
                       {info.amount? <div className="card-column"><div className="card-columnLabel">Amount</div><div>{info.amount}</div></div>: ""}
                     </div>
                   </div>
-                  );
-                }
-              })()}
+                );
+              })}
               </div>
             :""}
             <div className="note">
