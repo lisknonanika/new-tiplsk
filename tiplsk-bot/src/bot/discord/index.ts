@@ -25,7 +25,7 @@ const runBalanceCommand = async(author:discord.User) => {
   const ret = await balance.execute(conf.TYPE, author.id);
   
   // send message
-  if (ret.result) await author.send(`${conf.MESSAGE.BALANCE}\n${ret.data}`);
+  if (ret.result) await author.send(`${conf.MESSAGE.BALANCE}\n${ret.data} TLSK`);
   else await author.send(`${conf.MESSAGE.ERROR}\n${ret.data}`);
 }
 

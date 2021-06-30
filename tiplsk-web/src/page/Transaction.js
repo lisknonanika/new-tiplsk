@@ -238,7 +238,7 @@ class Transaction extends Component {
                 :""}
                 {this.state.pending.content.type === "tip"?
                   <div>
-                    <div className="card-column"><div className="card-columnLabel">Tip Amount</div><div>{this.state.pending.content.amount}</div></div>
+                    <div className="card-column"><div className="card-columnLabel">Tip Amount</div><div>{this.state.pending.content.amount}&nbsp;TLSK</div></div>
                     <div className="card-column">
                       <div className="card-columnLabel">Recipient ID&nbsp;<fa.FaLink/></div>
                       <div><a href={HOST + "/accounts/" + this.state.pending.content.service.type + "-" + this.state.pending.content.recipientId} className="link2">{this.state.pending.content.recipientId}</a></div>
